@@ -1,0 +1,137 @@
+#pragma once
+
+// wParam: not used
+// lParam: not used
+#define SEARCHITEM_CLICKMSG 	(WNDMSG_USERBASE+0x1)
+
+// wParam: item index
+// lParam: subitem index
+#define LISTCTRL_ITEM_CLICKMSG 	(WNDMSG_USERBASE+0x2)
+
+// wParam: first item index
+// lParam: not used
+#define LISTCTRL_FIRSTITEM_CHANGEMSG 	(WNDMSG_USERBASE+0x3)
+
+// wParam: head type
+// lParam: not used
+#define SELECTEDHEAD_CLICKMSG	(WNDMSG_USERBASE+0x10)
+
+// wParam: item wnd id
+// lParam: subitem index
+#define SELECTEDITEM_CLICKMSG	(WNDMSG_USERBASE+0x11)
+
+// wParam: item index from
+// lParam: item index to
+#define SELECTEDITEM_MOVEMSG	(WNDMSG_USERBASE+0x12)
+
+// wParam: item wnd id
+// lParam: not used
+#define SELECTEDPAGE_CLICKMSG	(WNDMSG_USERBASE+0x13)
+
+// wParam: not used
+// lParam: not used
+#define INPUTWND_BACKMSG		(WNDMSG_USERBASE+0x20)
+
+// wParam: not used
+// lParam: not used
+#define INPUTWND_CLEARMSG		(WNDMSG_USERBASE+0x21)
+
+// wParam: not used
+// lParam: not used
+#define INPUTWND_SEARCHMSG		(WNDMSG_USERBASE+0x22)
+
+// wParam: wChar
+// lParam: not used
+#define INPUTWND_CHARMSG		(WNDMSG_USERBASE+0x23)
+
+// wParam: wChar
+// lParam: not used
+#define INPUTWND_WORDLENGTHMSG	(WNDMSG_USERBASE+0x24)
+
+#define INPUTWND_SPECIALCHARMSG (WNDMSG_USERBASE+0x25)
+
+#define INPUTWND_BKTYPECONDITION_CHARMSG (WNDMSG_USERBASE+0x26)
+
+// wParam: new language ID
+// lParam: not used
+#define LANGUAGEWND_CHANGEMSG	(WNDMSG_USERBASE+0x30)
+
+// wParam: not used
+// lParam: not used
+#define LANGUAGEWND_RETURNMSG	(WNDMSG_USERBASE+0x31)
+
+// wParam: item wnd id
+// lParam: not used
+#define PLAYERINFO_SONGSTATE_CHANGE	(WNDMSG_USERBASE+0x40)
+
+// wParam: item wnd id
+// lParam: not used
+#define PLAYERINFO_LISTSTATE_CHANGE	(WNDMSG_USERBASE+0x41)
+
+#define DOWNINFO_LISTSTATE_CHANGE	(WNDMSG_USERBASE+0x42)
+#define DOWNINFO_DOWNLOAD_OK	    (WNDMSG_USERBASE+0x43)
+#define DOWNINFO_DOWNLOAD_FAILURE	(WNDMSG_USERBASE+0x44)
+
+#define DOWNINFO_DBDOWNLOAD_OK		(WNDMSG_USERBASE+0x45)
+#define DOWNINFO_DBDOWNLOAD_FAILURE	(WNDMSG_USERBASE+0x46)
+
+#define INPUT_WIFIINFO_COMFIRM		(WNDMSG_USERBASE+0x47)
+
+// wParam: not used
+// lParam: not used
+#define USERLOGIN_OKMSG	(WNDMSG_USERBASE+0x50)
+
+// wParam: not used
+// lParam: not used
+#define PLAYERINFO_ORIGINAL_CHANGE	(WNDMSG_USERBASE+0x51)
+
+#define COMFIRM_TO_DOWNLOAD		(WNDMSG_USERBASE+0x52)
+
+// wParam: not used
+// lParam: not used
+#define BOX_ITEM_INIT			(WNDMSG_USERBASE+0x61)
+#define BOX_ITEM_EXIT			(WNDMSG_USERBASE+0x62)
+#define BOX_ITME_CLICK			(WNDMSG_USERBASE+0x63)
+#define BOX_HELP_CLICK			(WNDMSG_USERBASE+0x64)
+#define FAVORIT_EXIT			(WNDMSG_USERBASE+0x65)
+
+#define LOGINWND_OKBTN			(WNDMSG_USERBASE+0x66)
+
+#define ALLUPGRADE_DONE			(WNDMSG_USERBASE+0x67)
+
+#define INTERNETTV_HOME_CLICK		(WNDMSG_USERBASE+0x92)
+
+#define MULTIMEDIEA_KGO_CLICK		(WNDMSG_USERBASE+0x93)
+
+#define INTERNETTV_CATEGORY_CLICK	(WNDMSG_USERBASE+0xA1)
+
+#define INTERNETTV_MEDIA_CLOSE		(WNDMSG_USERBASE+0x82)
+
+// wParam: zimu idx
+// lParam: not used
+#define SEARCHPINYINITEM_CLICKMSG 	(WNDMSG_USERBASE+0xA2)
+
+#define MULTIMEDIA_DEVICE_CLICKMSG	(WNDMSG_USERBASE+0xA3)
+
+#define MULTIMEDIA_DELETE_CLICKMSG	(WNDMSG_USERBASE+0xA4)
+
+#define MULTIMEDIA_SAVE_CLICKMSG	(WNDMSG_USERBASE+0xA5)
+
+#define MULTIMEDIA_CANCLE_SAVE_CLICKMSG	(WNDMSG_USERBASE+0xA6)
+
+#define MULTIMEDIA_LOGIN_CLICKMSG	(WNDMSG_USERBASE+0xA7)
+
+#define MULTIMEDIA_SETINFO_CLICKMSG	(WNDMSG_USERBASE+0xA8)
+
+#define INTERNET_FILTER_CLICKMSG	(WNDMSG_USERBASE+0xA9)
+
+#define INTERNET_EPISODE_CLICKMSG	(WNDMSG_USERBASE+0xAa)
+
+#define NOTETOCLOSEMOVIE_MSG		(WNDMSG_USERBASE+0xAb)
+
+#define STARTDHCP_CLEARMSG			(WNDMSG_USERBASE+0xAc)
+
+#define VIDEO_SHOWPIC_MSG			(WNDMSG_USERBASE+0xAd)		//开始输出视频广播消息
+
+#define DISPLAY_INSERT_COIN_MSG		(WNDMSG_USERBASE+0xAe)		//收到一个投币信号
+
