@@ -23,7 +23,7 @@ static void StartApp()
 	const char *ptr = parser.GetStrValue("StartSysVideoFileName","path","./KTV_Data/osdmpg/StartTv.mpg");
 	if ( ptr && IsFileExist(ptr) && g_pPlayerCtrl )
 	{
-		RECT rc = {0, 0, 1920, 1080};
+		RECT rc = {1045, 945, 184, 121};
 		//g_pPlayerCtrl->Player_Play(PLYMODE_STREAM, ptr, FALSE, FALSE);
 		g_pPlayerCtrl->Player_Play(PLYMODE_FILE, ptr, FALSE, FALSE);
 		g_PLYCtrl.StartPhantom(rc);
