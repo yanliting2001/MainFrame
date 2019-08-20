@@ -33,8 +33,7 @@ void CLeftPierPanel::Create(CBaseWnd *pParent)
   
   for (int i = 0; i < LeftItem_count; i++ )
 	{
-    if(i == Logo_item || i == TimeBg_item || i == NameBg_item || i == VolumeBG_item 
-		||i == UserBK_item)
+    if(i == Logo_item || i == TimeBg_item || i == NameBg_item || i == VolumeBG_item)
     {
       mLeftItem[i].CreateStatic(this, rcControl);
     }
