@@ -20,7 +20,7 @@ void CPageManager::InitPages()
 	gPhantomPage->Create(theBaseApp->GetMainWindow());
 
 	gMainCtrlPage->Show(TRUE);
-	gPhantomPage->Show(TRUE);
+	gPhantomPage->SetWindowVisible(TRUE);
 
 	UINT64 uTime1 = GetTickCount();
 	while (GetTickCount()-uTime1 <= 1000)
