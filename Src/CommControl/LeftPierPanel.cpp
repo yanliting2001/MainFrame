@@ -232,7 +232,7 @@ void CLeftPierPanel::OnClick(CBaseWnd *pWnd, POINT pt)
   		gMainCtrlPage->SetPopuWndVisible(login_item, TRUE, CBaseLoginWnd::type_setting);
   		break;
       
-	case UserImg_item:
+	case UserBK_item:
 
      		 if ( gMainCtrlPage->mSharingLogoutWnd.IsWindowVisible() )
 			gMainCtrlPage->mSharingLogoutWnd.SetWindowVisible(FALSE);
