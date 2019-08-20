@@ -310,11 +310,11 @@ void CHomePageFragment::OnClickItem(HOMEPAGESELECTTYPE_E type)
 		gSongListFragment->SetSearchBarItem(&gSearchSpell, 0);
 		gMainCtrlPage->SetCurrentFragment(Fragment_SongList);
 		break;
-	/*
-	case selectType_album:
+	
+	case selectType_classify:
 		gMainCtrlPage->SetCurrentFragment(Fragment_AlbumSong);
 		break;
-  
+  	/*
 	case selectType_Grade:
    {
   		static SEARCHITEM search;
