@@ -186,7 +186,8 @@ void CBottomPierPanel::OnClick(CBaseWnd *pWnd, POINT pt)
     		gMainCtrlPage->SetServerQRCodeVisible();
 		break;
 	case BTN_PUSH_ID:
-		gMainCtrlPage->SetDlnaInfoVisible();
+		//gMainCtrlPage->SetDlnaInfoVisible();
+		gPageManager->SetCurrentPage(Page_PhantomPage);
 		break;
   /*
   case BTN_MOVIE_ID:    

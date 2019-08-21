@@ -603,7 +603,7 @@ void CBCM_Ctrl::ProcessCmdMsg()
     		}
     		else if ( strcmp(vCmdMsg[2], PLY_PLAY_PHANTOM) == 0)
     		{
-    			RECT rRect = {0, 0, 1920, 1080};
+    			RECT rRect = {1045, 945, 184, 121};
     			g_PLYCtrl.StartPhantom(rRect);
     		}
     		else if( strcmp(vCmdMsg[2], PLY_PLAY_MTV) == 0 )
