@@ -25,7 +25,6 @@ public:
 public:
 	virtual void OnClick(CBaseWnd *pWnd, POINT pt);
 	void OnTouchDown(CBaseWnd *pWnd, POINT pt);
-	void OnTouchDown(CBaseWnd *pWnd, POINT pt);
 	void OnTouchUp(CBaseWnd *pWnd, POINT pt, int xDistance, int yDistance, 	UINT64 uUsedTime);
 	void OnTouchMove(CBaseWnd *pWnd, POINT pt);
 	void OnTouchDrag(CBaseWnd *pWnd, int xDragLen, int yDragLen);

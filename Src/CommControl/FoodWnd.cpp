@@ -9,6 +9,8 @@
 #define BTN_PUSHINFO_ID			0x01
 #define BTN_PUSHITEM_ID		0x02
 #define BTN_CLOSE_ID		0x30
+#define ITEM_PRESSED_SCALE	0.9f
+#define BTN_ITEM_BASE_ID	0x01
 #define FOODS_PATH		"./KTV_Data/food_textures"
 
 
@@ -95,7 +97,7 @@ void CFoodWnd::LoadResource()
 		CTexture texture;
 		pFile = (FOOD_FILE_INFO_S*)mFoodFileLists.GetAt(i);
 		texture.CreateFromImgFile(pFile->cFilePath);
-		mFoodItems[i].SetTextures(texture);
+		mFoodItems[i].SetTextures(&texture);
 		mFoodItems[i].MoveWindow(&rcControl);
 	}
 
@@ -226,7 +228,7 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
 		}
 
 		if( (strcasestr(file->d_name,".jpg") == NULL) 	&&
-			(strcasestr(file->d_name,".png") == NULL) 
+			(strcasestr(file->d_name,".png") == NULL) )
 		{
 			continue;
 		}
@@ -240,7 +242,7 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
 			break ;
 		}
 
-		memset(pNewFile, 0x0, sizeof(UDISK_FILE_INFO_S));
+		memset(pNewFile, 0x0, sizeof(FOOD_FILE_INFO_S));
 
 		snprintf(pNewFile->cFileName, sizeof(pNewFile->cFileName), "%s", file->d_name);
 		snprintf(pNewFile->cFilePath, sizeof(pNewFile->cFilePath), "%s/%s", path, file->d_name);
