@@ -8,7 +8,8 @@
 
 #define BTN_PUSHINFO_ID			0x01
 #define BTN_PUSHITEM_ID		0x02
-#define BTN_CLOSE_ID		0x03
+#define BTN_CLOSE_ID		0x30
+#define FOODS_PATH		"./KTV_Data/food_textures"
 
 
 void CFoodWnd::Create(CBaseWnd *pParent)
@@ -32,7 +33,18 @@ void CFoodWnd::Create(CBaseWnd *pParent)
   
 	//mPushInfo.CreateStatic(this, rcControl);
 
-  mPushItem.CreateStatic(this, rcControl);
+  mHomeItemBKWnd.CreateStatic(this, rcControl);
+
+  //mPushItem.CreateStatic(this, rcControl);
+  	getFilesFromdir(&mFoodFileLists,FOODS_PATH,0);
+	int count = mFoodFileLists.GetCount();
+  	for ( int i = 0; i < count; ++i )
+	{
+		mFoodItems[i].Create(&mHomeItemBKWnd, rcControl, BUTTONTYPE_NORMAL, false, ITEM_PRESSED_SCALE);
+		mFoodItems[i].SetWndID(BTN_ITEM_BASE_ID + i);
+		mFoodItems[i].SetOnTouchListener(this);
+		mFoodItems[i].SetOnClickListener(this);
+	}
 
   mClose.Create(this, rcControl);
   mClose.SetWndID(BTN_CLOSE_ID);
@@ -67,12 +79,28 @@ void CFoodWnd::LoadResource()
   
   XmlLoadRect(&parser, "ShowWindowInfo", &rcShow);
 	XmlLoadRect(&parser, "HideWindowInfo", &rcHide);
+	
+	/*
   SAFE_STRNCPY(imgPath, parser.GetStrValue("ShowWindowInfo", "path", "BkGround"), sizeof(imgPath));
 	CreateImgTexture(imgPath, &bkTexture);
 	SetBackgroundTexture(&bkTexture);
-  CParentClass::MoveWindow(rcShow, rcHide);
+  	CParentClass::MoveWindow(rcShow, rcHide);
+	*/
+	
+	int count = mFoodFileLists.GetCount();
+  	for ( int i = 0; i < count; ++i )	
+	{
+		FOOD_FILE_INFO_S *pFile;
+		SetRectXY(&rcControl, 1000*i, 0, 1000, RECTHEIGHT(mWndRect));
+		CTexture texture;
+		pFile = (FOOD_FILE_INFO_S*)mFoodFileLists.GetAt(i);
+		texture.CreateFromImgFile(pFile->cFilePath);
+		mFoodItems[i].SetTextures(texture);
+		mFoodItems[i].MoveWindow(&rcControl);
+	}
 
-  XmlLoadRect(&parser, "CloseBtnInfo", &rcControl);
+
+  	XmlLoadRect(&parser, "CloseBtnInfo", &rcControl);
 	SAFE_STRNCPY(imgPath, parser.GetStrValue("CloseBtnInfo", "path", "LeftPier/Close"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, btnTextures);
 	mClose.SetTextures(btnTextures);
@@ -100,6 +128,125 @@ void CFoodWnd::OnClick(CBaseWnd *pWnd, POINT pt)
 		break;
 	}
 
+}
+
+void CFoodWnd::OnTouchDown(CBaseWnd *pWnd, POINT pt)
+{
+	pWnd->ConvertWndPointToScreenPoint(&mPtPressedScreen, pt);
+	ConvertScreenPointToWndPoint(&mPtPressedScreen, mPtPressedScreen);
+	mpPressedWnd = pWnd;
+
+	miXoffset = mHomeItemBKWnd.mRectRelativeToParent.left;
+
+	pWnd->SetCapture();
+}
+
+void CFoodWnd::OnTouchUp(CBaseWnd *pWnd, POINT pt, int xDistance, int yDistance, 	UINT64 uUsedTime)
+{
+	if ( pWnd != mpPressedWnd )
+		return;
+
+	ReleaseCapture();
+
+	mpPressedWnd = NULL;
+}
+
+void CFoodWnd::OnTouchMove(CBaseWnd *pWnd, POINT pt)
+{
+	if ( pWnd != mpPressedWnd )
+	{
+		return;
+	}
+
+	if ( RECTWIDTH(mrcOrigItemsBKShow) <= RECTWIDTH(mRectRelativeToParent) )
+		return ;
+
+	POINT ptDrag;
+	pWnd->ConvertWndPointToScreenPoint(&ptDrag, pt);
+	ConvertScreenPointToWndPoint(&ptDrag, ptDrag);
+
+	int xDragLen = ptDrag.x-mPtPressedScreen.x;
+	int dstLeft = miXoffset + xDragLen;
+	RECT rcCurBK;
+	rcCurBK.left = mrcOrigItemsBKShow.left + dstLeft;
+	rcCurBK.right = rcCurBK.left + RECTWIDTH(mrcOrigItemsBKShow);
+	rcCurBK.top = mrcOrigItemsBKShow.top;
+	rcCurBK.bottom = mrcOrigItemsBKShow.bottom;
+
+	if ( rcCurBK.left > mrcOrigItemsBKShow.left )
+	{
+		rcCurBK.left = mrcOrigItemsBKShow.left;
+		rcCurBK.right = mrcOrigItemsBKShow.right;
+	}
+	else if ( rcCurBK.right <= RECTWIDTH(mRectRelativeToParent) )
+	{
+		rcCurBK.right = RECTWIDTH(mRectRelativeToParent);
+		rcCurBK.left = rcCurBK.right - RECTWIDTH(mrcOrigItemsBKShow);
+	}
+
+	mHomeItemBKWnd.MoveWindow(&rcCurBK);
+}
+
+void CFoodWnd::OnTouchDrag(CBaseWnd *pWnd, int xDragLen, int yDragLen)
+{
+}
+
+void CFoodWnd::OnTouchLeave(CBaseWnd *pOldTouchWnd, CBaseWnd *pNewTouchWnd)
+{
+	ReleaseCapture();
+
+	mpPressedWnd = NULL;
+}
+
+void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
+{
+	if ( !list || !path )  return ;
+
+	DIR *pDir = NULL;
+	struct dirent *file = NULL;
+  
+	if ( (pDir = opendir(path)) == NULL )
+	{
+		DbgOutput(DBG_INFO,"open dirent:%s failed\n", path);
+		return;
+	}
+
+	while( (file = readdir(pDir)) != NULL )
+	{
+		if ( strncmp(file->d_name,".",1) == 0 )
+			continue;
+		else if ( file->d_type == DT_DIR )
+		{
+			if ( depth >= 1 )
+				continue;
+			char tmpPath[256] = {0};
+			snprintf(tmpPath, sizeof(tmpPath), "%s/%s", path, file->d_name);
+			getFilesFromdir(list, tmpPath, 1);
+			continue;
+		}
+
+		if( (strcasestr(file->d_name,".jpg") == NULL) 	&&
+			(strcasestr(file->d_name,".png") == NULL) 
+		{
+			continue;
+		}
+
+		printf("==the file name:%s\n", file->d_name);
+
+		FOOD_FILE_INFO_S *pNewFile = new FOOD_FILE_INFO_S;
+		if ( !pNewFile )
+		{
+			DbgOutput(DBG_INFO, "function %s:%u failed\n", __FUNCTION__, __LINE__);
+			break ;
+		}
+
+		memset(pNewFile, 0x0, sizeof(UDISK_FILE_INFO_S));
+
+		snprintf(pNewFile->cFileName, sizeof(pNewFile->cFileName), "%s", file->d_name);
+		snprintf(pNewFile->cFilePath, sizeof(pNewFile->cFilePath), "%s/%s", path, file->d_name);
+		list->AddData(pNewFile);
+	}
+	closedir(pDir);
 }
 
 
