@@ -56,8 +56,8 @@ void CFoodWnd::Create(CBaseWnd *pParent)
   mClose.Create(this, rcControl);
   mClose.SetWndID(BTN_CLOSE_ID);
   mClose.SetOnClickListener(this);
-
-	LoadResource();
+  SetOnTouchListener(this);
+  LoadResource();
 }
 
 void CFoodWnd::LoadResource()
@@ -162,11 +162,13 @@ void CFoodWnd::OnTouchUp(CBaseWnd *pWnd, POINT pt, int xDistance, int yDistance,
 
 void CFoodWnd::OnTouchMove(CBaseWnd *pWnd, POINT pt)
 {
+	printf("FoodWnd OnTouchMove presed x = %d ,move x = %d\r\n",mPtPressed.x,pt.x);
 	if ( pWnd != mpPressedWnd )
 	{
 		return;
 	}
 
+	printf("FoodWnd OnTouchMove presed x = %d ,move x = %d\r\n",mPtPressed.x,pt.x);
 	if (abs(pt.x-mPtPressed.x) < CLICK_MAX_DISTANCE){
 		return;
 	}
