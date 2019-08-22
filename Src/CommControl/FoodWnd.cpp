@@ -90,8 +90,8 @@ void CFoodWnd::LoadResource()
   SAFE_STRNCPY(imgPath, parser.GetStrValue("ShowWindowInfo", "path", "HomePage/Food_info"), sizeof(imgPath));
 	CreateImgTexture(imgPath, &bkTexture);
 	SetBackgroundTexture(&bkTexture);
-  	//CParentClass::MoveWindow(rcShow, rcHide);
-	CParentClass::MoveWindow(&rcShow);
+  	CParentClass::MoveWindow(rcShow, rcHide);
+	//CParentClass::MoveWindow(&rcShow);
 	
 	int count = mFoodFileLists.GetCount();
   	for ( int i = 0; i < count; ++i )	
