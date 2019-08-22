@@ -155,6 +155,19 @@ void CFoodWnd::OnTouchUp(CBaseWnd *pWnd, POINT pt, int xDistance, int yDistance,
 	if ( pWnd != mpPressedWnd )
 		return;
 
+	printf("FoodWnd OnTouchUp presed x = %d ,move x = %d\r\n",mPtPressed.x,pt.x);
+	if (abs(pt.x-mPtPressed.x) < CLICK_MAX_DISTANCE){
+		return;
+	}
+	int count = mFoodFileLists.GetCount();
+	printf("FoodWnd OnTouchUp count = %d\r\n",count);
+	if(pt.x >mPtPressed.x){
+		if(foodItemIndex < count-1) foodItemIndex ++;
+	}else {
+		if(foodItemIndex>0) foodItemIndex--;
+	}
+	setBackgroundTexture(foodItemIndex);
+
 	ReleaseCapture();
 
 	mpPressedWnd = NULL;
@@ -162,25 +175,10 @@ void CFoodWnd::OnTouchUp(CBaseWnd *pWnd, POINT pt, int xDistance, int yDistance,
 
 void CFoodWnd::OnTouchMove(CBaseWnd *pWnd, POINT pt)
 {
-	printf("FoodWnd OnTouchMove presed x = %d ,move x = %d\r\n",mPtPressed.x,pt.x);
 	if ( pWnd != mpPressedWnd )
 	{
 		return;
 	}
-
-	printf("FoodWnd OnTouchMove presed x = %d ,move x = %d\r\n",mPtPressed.x,pt.x);
-	if (abs(pt.x-mPtPressed.x) < CLICK_MAX_DISTANCE){
-		return;
-	}
-
-	if(pt.x >mPtPressed.x){
-		int count = mFoodFileLists.GetCount();
-		if(foodItemIndex < count-1) foodItemIndex ++;
-	}else {
-		if(foodItemIndex>0) foodItemIndex--;
-	}
-	setBackgroundTexture(foodItemIndex);
-	
 }
 
 void CFoodWnd::OnTouchDrag(CBaseWnd *pWnd, int xDragLen, int yDragLen)
