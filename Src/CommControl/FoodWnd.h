@@ -31,6 +31,7 @@ public:
 	void OnTouchLeave(CBaseWnd *pOldTouchWnd, CBaseWnd *pNewTouchWnd);
 private:
 	void getFilesFromdir(CPtrCtrl *list, const char *path, int depth);
+	void setBackgroundTexture(int index);
 
 private:
 	CBaseWnd mPushInfo;

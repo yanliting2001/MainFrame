@@ -87,10 +87,12 @@ void CFoodWnd::LoadResource()
   XmlLoadRect(&parser, "ShowWindowInfo", &rcShow);
 	XmlLoadRect(&parser, "HideWindowInfo", &rcHide);
 	
-	
-  SAFE_STRNCPY(imgPath, parser.GetStrValue("ShowWindowInfo", "path", "HomePage/Food_info"), sizeof(imgPath));
-	CreateImgTexture(imgPath, &bkTexture);
-	SetBackgroundTexture(&bkTexture);
+
+  	//SAFE_STRNCPY(imgPath, parser.GetStrValue("ShowWindowInfo", "path", "HomePage/Food_info"), sizeof(imgPath));
+	//CreateImgTexture(imgPath, &bkTexture);
+	//SetBackgroundTexture(&bkTexture);
+
+	setBackgroundTexture(0);
   	CParentClass::MoveWindow(rcShow, rcHide);
 	//CParentClass::MoveWindow(&rcShow);
 
@@ -255,6 +257,17 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
 		list->AddData(pNewFile);
 	}
 	closedir(pDir);
+}
+void CFoodWnd::setBackgroundTexture(int index){
+	CTexture bkTexture;
+	FOOD_FILE_INFO_S *pFile;
+	int count = mFoodFileLists.GetCount();
+	if(index < count){
+		pFile = (FOOD_FILE_INFO_S*)mFoodFileLists.GetAt(index);
+		printf("==set Food item index = %d:%s\n",index, pFile->cFilePath);
+		if(pFile) bkTexture.CreateFromImgFile(pFile->cFilePath);
+		SetBackgroundTexture(&bkTexture);
+	}
 }
 
 
