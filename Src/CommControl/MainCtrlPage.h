@@ -206,6 +206,7 @@ public:
 
 private:
 	int miCurVol;		// 当前音量值
+	RECT mPhantomRect;
 
 private:
 	CUpgradeWnd mUpgradeWnd;

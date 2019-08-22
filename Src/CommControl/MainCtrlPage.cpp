@@ -159,6 +159,7 @@ void CMainCtrlPage::LoadResource()
 	XmlLoadRect(&parser, "SearchBtnLocation", &rcSearchBtn);
 	XmlLoadRect(&parser, "TextEditLocation", &rcTextEdit);
 	XmlLoadRect(&parser, "InputWndLocation", &rcInputPanel);
+	XmlLoadRect(&parser, "PhantomRectLocation", &mPhantomRect);
 
 	mSearchInputWnd.MoveWindow(
 		rcSearchInput,
@@ -202,6 +203,7 @@ void CMainCtrlPage::Show(BOOL bShow)
 	mBottomPierPanel.SlideShowWindow(bShow);
 	mTopPierPanel.SlideShowWindow(bShow);
 	mLeftPierPanel.SlideShowWindow(bShow);
+	SetPhantomVisible(TRUE);
   if ( mSongListFragment.IsWindowVisible())
   {
     SetCurrentFragment(Fragment_HomePage);
@@ -270,7 +272,7 @@ void CMainCtrlPage::ShowChildFragment(
 	case Fragment_HomePage:
     
 		mHomePageFragment.SetWindowVisible(TRUE);
-    mHomePageFragment.mHomeItemBKWnd.MoveWindow(&mHomePageFragment.mrcOrigItemsBKShow);
+    		mHomePageFragment.mHomeItemBKWnd.MoveWindow(&mHomePageFragment.mrcOrigItemsBKShow);
 		mHomePageFragment.SetFocus();
 		mSearchInputWnd.SetMsgRecvWnd(NULL);
 		break;
@@ -349,6 +351,12 @@ void CMainCtrlPage::ShowChildFragment(
 
 void CMainCtrlPage::SetPhantomVisible(BOOL iVisible)
 {
+
+	if((mCurShowFragmentType == Fragment_HomePage))
+	{
+		
+#endif
+	}
 	if(iVisible)
 	{
 		if(mCurShowFragmentType == Fragment_HomePage
@@ -358,11 +366,17 @@ void CMainCtrlPage::SetPhantomVisible(BOOL iVisible)
 				&& !mBottomPierPanel.mSelectedList.IsWindowVisible() */)
 		{
 			//mMTVBaseWnd.SetMTVVisible(TRUE);
-
+			gPlayerInfo->PlayMTV(
+			mPhantomRect.left,
+			mPhantomRect.top,
+			RECTWIDTH(mPhantomRect),
+			RECTHEIGHT(mPhantomRect));
+			mPhantomBtn.SetWindowVisible(TRUE);
 		}
 	}
 	else
 	{
+		gPlayerInfo->StopMTV();
 	//	mPhantomBtn.SetWindowVisible(FALSE);
 //		if ( !(mBottomPierPanel.mSelectedList.IsWindowVisible())/* ||
 //			 ( mBottomPierPanel.mSelectedList.mCurrentTab == headTab_Mtv) */)
