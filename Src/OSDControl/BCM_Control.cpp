@@ -23,7 +23,7 @@ static void StartApp()
 	const char *ptr = parser.GetStrValue("StartSysVideoFileName","path","./KTV_Data/osdmpg/StartTv.mpg");
 	if ( ptr && IsFileExist(ptr) && g_pPlayerCtrl )
 	{
-		RECT rc = {1045, 945, 184, 121};
+		RECT rc = {1045, 945, 1045+184, 945+121};
 		//g_pPlayerCtrl->Player_Play(PLYMODE_STREAM, ptr, FALSE, FALSE);
 		g_pPlayerCtrl->Player_Play(PLYMODE_FILE, ptr, FALSE, FALSE);
 		g_PLYCtrl.StartPhantom(rc);
@@ -603,7 +603,7 @@ void CBCM_Ctrl::ProcessCmdMsg()
     		}
     		else if ( strcmp(vCmdMsg[2], PLY_PLAY_PHANTOM) == 0)
     		{
-    			RECT rRect = {1045, 945, 184, 121};
+    			RECT rRect = {1045, 945, 1045+184, 945+121};
     			g_PLYCtrl.StartPhantom(rRect);
     		}
     		else if( strcmp(vCmdMsg[2], PLY_PLAY_MTV) == 0 )
