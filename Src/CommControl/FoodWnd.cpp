@@ -21,7 +21,11 @@ void CFoodWnd::Create(CBaseWnd *pParent)
 	SetRectXY(&rcShow, 300, 200, 525, 370);
 	SetRectXY(&rcHide, 300, -370, 525, 370);
 
+	RECT rc = {0, 0, LAYOUT_WIDTH, LAYOUT_HEIGHT};
+
 	SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+18);
+	CreateStatic(pParent,	rc,  WINDOWFLAG_MANUALSETZORDER|WINDOWFLAG_POPUP, WINDOWSTATE_INVISIBLE);
+	/*
 	CParentClass::Create(
 		"FoodWnd",
 		pParent,
@@ -30,7 +34,7 @@ void CFoodWnd::Create(CBaseWnd *pParent)
 		rcHide,
 		FALSE,
 		TRUE);
-
+	*/
 	RECT rcControl = {50, 36, 100, 100};
   
 	//mPushInfo.CreateStatic(this, rcControl);
@@ -82,12 +86,12 @@ void CFoodWnd::LoadResource()
   XmlLoadRect(&parser, "ShowWindowInfo", &rcShow);
 	XmlLoadRect(&parser, "HideWindowInfo", &rcHide);
 	
-	/*
-  SAFE_STRNCPY(imgPath, parser.GetStrValue("ShowWindowInfo", "path", "BkGround"), sizeof(imgPath));
+	
+  SAFE_STRNCPY(imgPath, parser.GetStrValue("ShowWindowInfo", "path", "HomePage/Food_info"), sizeof(imgPath));
 	CreateImgTexture(imgPath, &bkTexture);
 	SetBackgroundTexture(&bkTexture);
-  	CParentClass::MoveWindow(rcShow, rcHide);
-	*/
+  	//CParentClass::MoveWindow(rcShow, rcHide);
+	CParentClass::MoveWindow(&rcShow);
 	
 	int count = mFoodFileLists.GetCount();
   	for ( int i = 0; i < count; ++i )	
