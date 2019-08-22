@@ -351,11 +351,6 @@ void CMainCtrlPage::ShowChildFragment(
 
 void CMainCtrlPage::SetPhantomVisible(BOOL iVisible)
 {
-
-	if((mCurShowFragmentType == Fragment_HomePage))
-	{
-		
-	}
 	if(iVisible)
 	{
 		if(mCurShowFragmentType == Fragment_HomePage

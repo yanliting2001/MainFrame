@@ -39,11 +39,12 @@ void CFoodWnd::Create(CBaseWnd *pParent)
   
 	//mPushInfo.CreateStatic(this, rcControl);
 
-  mHomeItemBKWnd.CreateStatic(this, rcControl);
+  //mHomeItemBKWnd.CreateStatic(this, rcControl);
 
   //mPushItem.CreateStatic(this, rcControl);
   	getFilesFromdir(&mFoodFileLists,FOODS_PATH,0);
 	int count = mFoodFileLists.GetCount();
+	/*
   	for ( int i = 0; i < count; ++i )
 	{
 		mFoodItems[i].Create(&mHomeItemBKWnd, rcControl, BUTTONTYPE_NORMAL, false, ITEM_PRESSED_SCALE);
@@ -51,7 +52,7 @@ void CFoodWnd::Create(CBaseWnd *pParent)
 		mFoodItems[i].SetOnTouchListener(this);
 		mFoodItems[i].SetOnClickListener(this);
 	}
-
+	*/
   mClose.Create(this, rcControl);
   mClose.SetWndID(BTN_CLOSE_ID);
   mClose.SetOnClickListener(this);
@@ -92,7 +93,8 @@ void CFoodWnd::LoadResource()
 	SetBackgroundTexture(&bkTexture);
   	CParentClass::MoveWindow(rcShow, rcHide);
 	//CParentClass::MoveWindow(&rcShow);
-	
+
+	/*
 	int count = mFoodFileLists.GetCount();
   	for ( int i = 0; i < count; ++i )	
 	{
@@ -104,7 +106,7 @@ void CFoodWnd::LoadResource()
 		mFoodItems[i].SetTextures(&texture);
 		mFoodItems[i].MoveWindow(&rcControl);
 	}
-
+	*/
 
   	XmlLoadRect(&parser, "CloseBtnInfo", &rcControl);
 	SAFE_STRNCPY(imgPath, parser.GetStrValue("CloseBtnInfo", "path", "LeftPier/Close"), sizeof(imgPath));

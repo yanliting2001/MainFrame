@@ -187,7 +187,8 @@ void CBottomPierPanel::OnClick(CBaseWnd *pWnd, POINT pt)
 		break;
 	case BTN_PUSH_ID:
 		//gMainCtrlPage->SetDlnaInfoVisible();
-		gPageManager->SetCurrentPage(Page_PhantomPage);
+		//gPageManager->SetCurrentPage(Page_PhantomPage);
+		gMainCtrlPage->SetPhantomVisible(TRUE);
 		break;
   /*
   case BTN_MOVIE_ID:    
