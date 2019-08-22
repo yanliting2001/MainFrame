@@ -355,7 +355,6 @@ void CMainCtrlPage::SetPhantomVisible(BOOL iVisible)
 	if((mCurShowFragmentType == Fragment_HomePage))
 	{
 		
-#endif
 	}
 	if(iVisible)
 	{
@@ -371,7 +370,7 @@ void CMainCtrlPage::SetPhantomVisible(BOOL iVisible)
 			mPhantomRect.top,
 			RECTWIDTH(mPhantomRect),
 			RECTHEIGHT(mPhantomRect));
-			mPhantomBtn.SetWindowVisible(TRUE);
+			//mPhantomBtn.SetWindowVisible(TRUE);
 		}
 	}
 	else
