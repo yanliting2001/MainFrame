@@ -49,7 +49,9 @@ private:
 	POINT mPtPressedScreen;
 	CBaseWnd *mpPressedWnd;
 	int miXoffset;
+	POINT mPtPressed;
 	CPtrListCtrl mFoodFileLists;
+	int foodItemIndex;
 
 };
 

@@ -20,7 +20,7 @@ void CFoodWnd::Create(CBaseWnd *pParent)
 	RECT rcHide;
 	SetRectXY(&rcShow, 300, 200, 525, 370);
 	SetRectXY(&rcHide, 300, -370, 525, 370);
-
+	foodItemIndex = 0;
 	//RECT rc = {0, 0, LAYOUT_WIDTH, LAYOUT_HEIGHT};
 
 	SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+18);
@@ -145,8 +145,7 @@ void CFoodWnd::OnTouchDown(CBaseWnd *pWnd, POINT pt)
 	pWnd->ConvertWndPointToScreenPoint(&mPtPressedScreen, pt);
 	ConvertScreenPointToWndPoint(&mPtPressedScreen, mPtPressedScreen);
 	mpPressedWnd = pWnd;
-
-	miXoffset = mHomeItemBKWnd.mRectRelativeToParent.left;
+	mPtPressed = pt;
 
 	pWnd->SetCapture();
 }
@@ -168,33 +167,18 @@ void CFoodWnd::OnTouchMove(CBaseWnd *pWnd, POINT pt)
 		return;
 	}
 
-	if ( RECTWIDTH(mrcOrigItemsBKShow) <= RECTWIDTH(mRectRelativeToParent) )
-		return ;
-
-	POINT ptDrag;
-	pWnd->ConvertWndPointToScreenPoint(&ptDrag, pt);
-	ConvertScreenPointToWndPoint(&ptDrag, ptDrag);
-
-	int xDragLen = ptDrag.x-mPtPressedScreen.x;
-	int dstLeft = miXoffset + xDragLen;
-	RECT rcCurBK;
-	rcCurBK.left = mrcOrigItemsBKShow.left + dstLeft;
-	rcCurBK.right = rcCurBK.left + RECTWIDTH(mrcOrigItemsBKShow);
-	rcCurBK.top = mrcOrigItemsBKShow.top;
-	rcCurBK.bottom = mrcOrigItemsBKShow.bottom;
-
-	if ( rcCurBK.left > mrcOrigItemsBKShow.left )
-	{
-		rcCurBK.left = mrcOrigItemsBKShow.left;
-		rcCurBK.right = mrcOrigItemsBKShow.right;
-	}
-	else if ( rcCurBK.right <= RECTWIDTH(mRectRelativeToParent) )
-	{
-		rcCurBK.right = RECTWIDTH(mRectRelativeToParent);
-		rcCurBK.left = rcCurBK.right - RECTWIDTH(mrcOrigItemsBKShow);
+	if (abs(pt.x-mPtPressed.x) < CLICK_MAX_DISTANCE){
+		return;
 	}
 
-	mHomeItemBKWnd.MoveWindow(&rcCurBK);
+	if(pt.x >mPtPressed.x){
+		int count = mFoodFileLists.GetCount();
+		if(foodItemIndex < count-1) foodItemIndex ++;
+	}else {
+		if(foodItemIndex>0) foodItemIndex--;
+	}
+	setBackgroundTexture(foodItemIndex);
+	
 }
 
 void CFoodWnd::OnTouchDrag(CBaseWnd *pWnd, int xDragLen, int yDragLen)
