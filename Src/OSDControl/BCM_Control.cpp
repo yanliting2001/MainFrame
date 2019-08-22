@@ -1360,10 +1360,11 @@ void CBCM_Ctrl::StartBCM()  // 开机视频播放完成，启动
 	theE3DEngine->setTransparentRect(false);
 	gMainCtrlPage->mSharingIndexWnd.StartCheckLogin();
 #endif
-	g_PLYCtrl.StopPhantom();
+	//g_PLYCtrl.StopPhantom();
 	g_PLYCtrl.Stop(PLAYER_MAIN);
 	//g_PLYCtrl.RePlayBkgroundView();
-
+	RECT rc = {1045, 945, 1045+184, 945+121};
+	g_PLYCtrl.StartPhantom(RECT rc);
 #if WORKMODE == LOCAL_WORKMODE
 	if ( theBaseApp )
 		theBaseApp->ResumeInput();
