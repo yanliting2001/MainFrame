@@ -105,7 +105,7 @@ void CLeftPierPanel::LoadResource()
 	mLoginUserImgWnd.MoveWindow(&rcControl);
 
   	XmlLoadRect(&parser, "NameWndBg", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("NameWndBg", "path", "LeftPier/TimeBg"), sizeof(imgPath));
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("NameWndBg", "path", "LeftPier/UserNameBg"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, bkTexture);
 	mLeftItem[NameBg_item].SetTextures(bkTexture);
 	mLeftItem[NameBg_item].MoveWindow(&rcControl);
