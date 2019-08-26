@@ -10,6 +10,7 @@ typedef enum _eBottomSelectType
     BTN_SERVER_ID,
     BTN_PUSH_ID,	
     BTN_RESUME_ID,	
+    BTN_MOVIE_ID,
     BTN_ORIGINAL_ID,
     BTN_REPLAY_ID,			
     BTN_SWITCH_ID,					

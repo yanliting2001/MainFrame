@@ -105,6 +105,12 @@ void CBottomPierPanel::LoadResource()
 	mSubItem[BTN_RESUME_ID].SetTextures(btnTextures);
 	mSubItem[BTN_RESUME_ID].MoveWindow(&rcControl);
 
+	XmlLoadRect(&parser, "MvBtnInfo", &rcControl);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("MvBtnInfo", "path", "BottomPier/Mv"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, btnTextures);
+	mSubItem[BTN_MOVIE_ID].SetTextures(btnTextures);
+	mSubItem[BTN_MOVIE_ID].MoveWindow(&rcControl);
+
 
   XmlLoadRect(&parser, "OriginalBtnInfo", &rcControl);
 	SAFE_STRNCPY(imgPath, parser.GetStrValue("OriginalBtnInfo", "path", "BottomPier/Original"), sizeof(imgPath));
@@ -186,14 +192,12 @@ void CBottomPierPanel::OnClick(CBaseWnd *pWnd, POINT pt)
     		gMainCtrlPage->SetServerQRCodeVisible();
 		break;
 	case BTN_PUSH_ID:
-		//gMainCtrlPage->SetDlnaInfoVisible();
-		//gPageManager->SetCurrentPage(Page_PhantomPage);
-		gMainCtrlPage->SetPhantomVisible(TRUE);
+		gMainCtrlPage->SetDlnaInfoVisible();
 		break;
-  /*
   case BTN_MOVIE_ID:    
 		gPageManager->SetCurrentPage(Page_PhantomPage);
 		break;
+ /*
   case BTN_AMBIENCE_ID:
       
     if ( gMainCtrlPage->GetCurFragmentType() != ambienceWnd_item )
@@ -201,7 +205,7 @@ void CBottomPierPanel::OnClick(CBaseWnd *pWnd, POINT pt)
 			gMainCtrlPage->SetPopuWndVisible(ambienceWnd_item, TRUE);
 		}
 		break;
-        */
+*/
 	case BTN_ORIGINAL_ID:
 		SetAccompany(!mSubItem[BTN_ORIGINAL_ID].GetRadioBtnPressed(), TRUE);
 		break;
