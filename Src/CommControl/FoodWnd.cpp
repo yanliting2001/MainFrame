@@ -162,9 +162,9 @@ void CFoodWnd::OnTouchUp(CBaseWnd *pWnd, POINT pt, int xDistance, int yDistance,
 	int count = mFoodFileLists.GetCount();
 	printf("FoodWnd OnTouchUp count = %d\r\n",count);
 	if(pt.x >mPtPressed.x){
-		if(foodItemIndex < count-1) foodItemIndex ++;
-	}else {
 		if(foodItemIndex>0) foodItemIndex--;
+	}else {
+		if(foodItemIndex < count-1) foodItemIndex ++;
 	}
 	setBackgroundTexture(foodItemIndex);
 
