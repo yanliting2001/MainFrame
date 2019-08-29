@@ -198,7 +198,39 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
 
 	DIR *pDir = NULL;
 	struct dirent *file = NULL;
-  
+	struct dirent **entry_list;
+    	int count;
+	int i=0;
+	count = scandir(path, &entry_list, 0, alphasort);
+    	if (count < 0) {
+        return ;
+    	}
+		
+	for (i = 0; i < count; i++) {
+       	struct dirent *entry;
+        	entry = entry_list[i];
+		if( (strcasestr(file->d_name,".jpg") != NULL) 	||
+			(strcasestr(file->d_name,".png") != NULL) )
+		{
+			FOOD_FILE_INFO_S *pNewFile = new FOOD_FILE_INFO_S;
+			if ( !pNewFile )
+			{
+				DbgOutput(DBG_INFO, "function %s:%u failed\n", __FUNCTION__, __LINE__);
+				break ;
+			}
+
+			memset(pNewFile, 0x0, sizeof(FOOD_FILE_INFO_S));
+
+			snprintf(pNewFile->cFileName, sizeof(pNewFile->cFileName), "%s", file->d_name);
+			snprintf(pNewFile->cFilePath, sizeof(pNewFile->cFilePath), "%s/%s", path, file->d_name);
+			list->AddData(pNewFile);
+		}
+        	printf("%s\n", entry->d_name);
+        	free(entry);
+    	}
+    	free(entry_list);
+	
+  	/*
 	if ( (pDir = opendir(path)) == NULL )
 	{
 		DbgOutput(DBG_INFO,"open dirent:%s failed\n", path);
@@ -241,6 +273,7 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
 		list->AddData(pNewFile);
 	}
 	closedir(pDir);
+	*/
 }
 void CFoodWnd::setBackgroundTexture(int index){
 	CTexture bkTexture;
