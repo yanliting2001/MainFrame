@@ -197,7 +197,7 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
 	if ( !list || !path )  return ;
 
 	DIR *pDir = NULL;
-	struct dirent *file = NULL;
+	//struct dirent *file = NULL;
 	struct dirent **entry_list;
     	int count;
 	int i=0;
@@ -207,8 +207,8 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
     	}
 		
 	for (i = 0; i < count; i++) {
-       	struct dirent *entry;
-        	entry = entry_list[i];
+       	struct dirent *file;
+        	file = entry_list[i];
 		if( (strcasestr(file->d_name,".jpg") != NULL) 	||
 			(strcasestr(file->d_name,".png") != NULL) )
 		{
@@ -225,8 +225,8 @@ void CFoodWnd::getFilesFromdir(CPtrCtrl *list, const char *path, int depth)
 			snprintf(pNewFile->cFilePath, sizeof(pNewFile->cFilePath), "%s/%s", path, file->d_name);
 			list->AddData(pNewFile);
 		}
-        	printf("%s\n", entry->d_name);
-        	free(entry);
+        	printf("%s\n", file->d_name);
+        	free(file);
     	}
     	free(entry_list);
 	
