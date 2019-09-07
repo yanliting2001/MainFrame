@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseButton.h"
+#include "BaseSlide.h"
 #include "FragmentInterface.h"
 #include "SongListCtrl.h"
 #include "SearchTypeBar.h"
