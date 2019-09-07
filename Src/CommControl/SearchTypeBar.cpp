@@ -342,18 +342,7 @@ SEARCHITEM * CSearchTypeBar::GetSelectedSubItem()
 	{
 		pSubItem = (SEARCHITEM *)gSearchLanguageType.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
 	}
-	else if ( mpCurSearchItem->eType == SearchByMovieSong )
-	{
-		pSubItem = (SEARCHITEM *)gSearchMovieSong.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
-	}
-	else if ( mpCurSearchItem->eType == SearchByNewSong )
-	{
-		pSubItem = (SEARCHITEM *)gSearchNewSong.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
-	}
-	else if ( mpCurSearchItem->eType == SearchByPinyin )
-	{
-		pSubItem = (SEARCHITEM *)gSearchSpell.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
-	}
+	
 
 //	SEARCHITEM *pSubItem = (SEARCHITEM *)
 //			mpCurSearchItem->sChildItemList.GetAt(
@@ -393,18 +382,7 @@ SEARCHITEM * CSearchTypeBar::GetSelectedSubItemForSinger()
 	{
 		pSubItem = (SEARCHITEM *)gSearchLanguageType.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
 	}
-	else if ( mpCurSearchItem->eType == SearchByMovieSong )
-	{
-		pSubItem = (SEARCHITEM *)gSearchMovieSong.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
-	}
-	else if ( mpCurSearchItem->eType == SearchByNewSong )
-	{
-		pSubItem = (SEARCHITEM *)gSearchNewSong.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
-	}
-	else if ( mpCurSearchItem->eType == SearchByPinyin )
-	{
-		pSubItem = (SEARCHITEM *)gSearchSpell.sChildItemList.GetAt(mFirstShowItemIndex+mSelectedIndex);
-	}
+	
 
 //	SEARCHITEM *pSubItem = (SEARCHITEM *)
 //			mpCurSearchItem->sChildItemList.GetAt(
