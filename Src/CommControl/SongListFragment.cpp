@@ -562,17 +562,12 @@ void CSongListFragment::SetSearchBarItem(SEARCHITEM *pSearchItem, int nFirstShow
 	{
 		mLastSearchSubItem = NULL;
 	}
-	if((pSearchItem->eType == SearchByPinyin) ||
-		(pSearchItem->eType == SearchByNewSong))
+	if((pSearchItem->eType == SearchByNewSong))
 	{
 		mSearchTypeBar.SetWindowVisible(FALSE);
-		mSearchPinyinTypeBar.SetCurZimuIdx(nFirstShowItemIndex);
-		mSearchPinyinTypeBar.SetWindowVisible(TRUE);
+	
 	}
-	else
-	{
-		mSearchPinyinTypeBar.SetWindowVisible(FALSE);
-	}
+	
 	mSearchTypeBar.SetSearchItem(pSearchItem, nFirstShowItemIndex);
 
 
@@ -598,14 +593,6 @@ void CSongListFragment::SetSearchBarItem(SEARCHITEM *pSearchItem, int nFirstShow
 	DbgOutput(DBG_DEBUG, "search prompt = %s, depth = %d, type = %d\n",
 		sPrompt.GetString(), pSearchItem->nDepth, pSearchItem->eType);
 
-	if(pSearchItem->eType == SearchByPinyin)
-		mIcoWnd.SetBackgroundTexture(&mSpellbkTexture);
-	else if(pSearchItem->eType == SearchByNewSong)
-		mIcoWnd.SetBackgroundTexture(&mNewSongbkTexture);
-	else if(pSearchItem->eType == SearchByLanguageType)
-		mIcoWnd.SetBackgroundTexture(&mLanguagebkTexture);
-	else if(pSearchItem->eType == SearchBySongType)
-		mIcoWnd.SetBackgroundTexture(&mTypebkTexture);
 	gMainCtrlPage->mSearchInputWnd.ResetSearchInfo();
 	OnSearchItemChange();
 
