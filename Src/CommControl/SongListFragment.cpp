@@ -346,6 +346,31 @@ void CSongListFragment::OnSearchItemChange()
 		uTime4-uTime0, uTime4);
 }
 
+void CSongListFragment::OnPositionChange(
+	CBaseWnd *pWnd,
+	int nOldPosition,
+	int nNewPostion,
+	BOOL bChangeEnd)
+{
+	int nPos = nNewPostion;
+
+	int nCountPerPage = mSongListCtrl.GetCountPerPage();
+
+	if (bChangeEnd)
+	{
+		int nItemIndex = nPos *nCountPerPage;
+
+		mSongListCtrl.SetFirstItemIndex(nItemIndex);
+		mSongListCtrl.StartFadeInEffect();
+	}
+	else
+	{
+		int nPageCount = mSongListCtrl.GetPageCount();
+
+		//mPagePrompt.SetListPageInfo(nPos+1, nPageCount);
+	}
+}
+
 void CSongListFragment::OnSongItemStateChange(int nItemIndex)
 {
 	LISTITEM *pli = mSongListCtrl.GetListItem(nItemIndex);
