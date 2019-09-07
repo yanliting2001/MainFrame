@@ -2,11 +2,13 @@
 #include "BaseButton.h"
 #include "FragmentInterface.h"
 #include "SongListCtrl.h"
+#include "SearchTypeBar.h"
 #include "CloudDownLoadPromptWnd.h"
 
 
 class CSongListFragment: public CFragment,
-	public IClickEventListener
+	public IClickEventListener,
+	public IPositionChangeEventListener
 {
 	typedef CFragment CParentClass;
 
@@ -30,6 +32,11 @@ public:
 public:
 	virtual void OnClick(CBaseWnd *pWnd, POINT pt);
 
+	virtual void OnPositionChange(
+		CBaseWnd *pWnd,
+		int nOldPosition,
+		int nNewPostion,
+		BOOL bChangeEnd);
 private:
 	void OnSearchItemChange();
 
@@ -51,7 +58,11 @@ public:
    int SendClickSongID(const char* cSongID);
 
 private:
+	CTexture mLanguagebkTexture;
+	CTexture mTypebkTexture;
 	SEARCHITEM *mCurSearchType;
+	SEARCHITEM * mLastSearchSubItem;
+	CSearchTypeBar mSearchTypeBar;
 	CSongListCtrl mSongListCtrl;
   CCloudDownLoadPromptWnd	mCloudDownLoadPromptWnd;
   

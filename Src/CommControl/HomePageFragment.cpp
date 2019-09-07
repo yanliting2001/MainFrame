@@ -307,7 +307,7 @@ void CHomePageFragment::OnClickItem(HOMEPAGESELECTTYPE_E type)
 		gMainCtrlPage->SetCurrentFragment(Fragment_SingerType);
 		break;
 	case selectType_songName:
-		gSongListFragment->SetSearchBarItem(&gSearchSpell, 0);
+		gSongListFragment->SetSearchBarItem(&gSearchLanguageType, 0);
 		gMainCtrlPage->SetCurrentFragment(Fragment_SongList);
 		break;
 	

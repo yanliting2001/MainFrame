@@ -46,6 +46,10 @@ void CSongListFragment::Create(CBaseWnd *pParent)
 	mNextPageBtn.SetWndID(BTN_NEXTPAGE_ID);
 	mNextPageBtn.SetOnClickListener(this);
 
+	RECT rcSearchType;
+	SetRectXY(&rcSearchType, 0, 35, LAYOUT_WIDTH, 40);
+	mSearchTypeBar.Create(this, rcSearchType);
+	mSearchTypeBar.SetMsgRecvWnd(this);
 	mPageInfoWnd.CreateStatic(this, rcListCtrl);
 
 	LoadResource();
@@ -87,20 +91,24 @@ void CSongListFragment::LoadResource()
 	XmlLoadRect(&parser, "ListCtrlLocation", &rcControl);
 	mSongListCtrl.MoveWindow(&rcControl);
 
+	XmlLoadRect(&parser, "SearchTypeLocation", &rcControl);
+	mSearchTypeBar.MoveWindow(&rcControl);
+	
+
 	XmlLoadRect(&parser, "ReturnBtnInfo", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("ReturnBtnInfo", "path", "FragmentPublic/ReturnBtn"), sizeof(imgPath));
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("ReturnBtnInfo", "path", "FragmentPublic/Return"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, btnTextures);
 	mReturnBtn.SetTextures(btnTextures);
 	mReturnBtn.MoveWindow(&rcControl);
 
 	XmlLoadRect(&parser, "PrevPageBtnInfo", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("PrevPageBtnInfo", "path", "FragmentPublic/ReturnBtn"), sizeof(imgPath));
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("PrevPageBtnInfo", "path", "FragmentPublic/PrevPage"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, btnTextures);
 	mPrevPageBtn.SetTextures(btnTextures);
 	mPrevPageBtn.MoveWindow(&rcControl);
 
 	XmlLoadRect(&parser, "NextPageBtnInfo", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("NextPageBtnInfo", "path", "FragmentPublic/ReturnBtn"), sizeof(imgPath));
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("NextPageBtnInfo", "path", "FragmentPublic/NextPage"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, btnTextures);
 	mNextPageBtn.SetTextures(btnTextures);
 	mNextPageBtn.MoveWindow(&rcControl);
@@ -177,6 +185,8 @@ void CSongListFragment::OnWindowVisible(BOOL bVisible)
 BOOL CSongListFragment::OnReturn()
 {
 	mSongListCtrl.WaitForEffectTimeOver();
+	mLastSearchSubItem = NULL;
+	mSearchTypeBar.SetSearchItem(NULL, 0);
 	return FALSE;
 }
 
@@ -532,7 +542,70 @@ void CSongListFragment::SetSearchBarItem(SEARCHITEM *pSearchItem, int nFirstShow
 		return;
 	}
 
-	mCurSearchType = pSearchItem;
+	SEARCHITEM *pCurSearchSubItem = mSearchTypeBar.GetSelectedSubItem();
+
+	if (pCurSearchSubItem && mLastSearchSubItem)
+	{
+		if (pCurSearchSubItem->eType != pSearchItem->eType)
+		{
+			if ( pCurSearchSubItem->eType != mLastSearchSubItem->eType )
+			{
+				mLastSearchSubItem = pCurSearchSubItem;
+			}
+		}
+	}
+	else if (pCurSearchSubItem)
+	{
+		mLastSearchSubItem = pCurSearchSubItem;
+	}
+	else
+	{
+		mLastSearchSubItem = NULL;
+	}
+	if((pSearchItem->eType == SearchByPinyin) ||
+		(pSearchItem->eType == SearchByNewSong))
+	{
+		mSearchTypeBar.SetWindowVisible(FALSE);
+		mSearchPinyinTypeBar.SetCurZimuIdx(nFirstShowItemIndex);
+		mSearchPinyinTypeBar.SetWindowVisible(TRUE);
+	}
+	else
+	{
+		mSearchPinyinTypeBar.SetWindowVisible(FALSE);
+	}
+	mSearchTypeBar.SetSearchItem(pSearchItem, nFirstShowItemIndex);
+
+
+	CBaseStringA sPrompt;
+
+	SEARCHITEM *pRoot = pSearchItem;
+
+	sPrompt.Set(pRoot->cItemName);
+
+	while (pRoot->pParentItem)
+	{
+		pRoot = pRoot->pParentItem;
+
+		CBaseStringA sTmp(&sPrompt);
+		sPrompt.Format("%s->%s", pRoot->cItemName, sTmp.GetString());
+	}
+
+	//modify by yq,2013-01-24
+//mSearchPrompt.SetWindowTextA(sPrompt.GetString());
+//	mPrompt.Set(sPrompt.GetString());
+	//end modify by yq,2013-01-24
+
+	DbgOutput(DBG_DEBUG, "search prompt = %s, depth = %d, type = %d\n",
+		sPrompt.GetString(), pSearchItem->nDepth, pSearchItem->eType);
+
+	if(pSearchItem->eType == SearchByPinyin)
+		mIcoWnd.SetBackgroundTexture(&mSpellbkTexture);
+	else if(pSearchItem->eType == SearchByNewSong)
+		mIcoWnd.SetBackgroundTexture(&mNewSongbkTexture);
+	else if(pSearchItem->eType == SearchByLanguageType)
+		mIcoWnd.SetBackgroundTexture(&mLanguagebkTexture);
+	else if(pSearchItem->eType == SearchBySongType)
+		mIcoWnd.SetBackgroundTexture(&mTypebkTexture);
 	gMainCtrlPage->mSearchInputWnd.ResetSearchInfo();
 	OnSearchItemChange();
 

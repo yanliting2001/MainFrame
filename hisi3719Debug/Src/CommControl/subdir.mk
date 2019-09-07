@@ -37,6 +37,7 @@ CPP_SRCS += \
 ../Src/CommControl/PromptMsg.cpp \
 ../Src/CommControl/ShopWnd.cpp \
 ../Src/CommControl/FoodWnd.cpp \
+../Src/CommControl/SearchTypeBar.cpp \
 ../Src/CommControl/WaitingWnd.cpp
 
 OBJS += \
@@ -73,6 +74,7 @@ OBJS += \
 ./Src/CommControl/PromptMsg.o \
 ./Src/CommControl/ShopWnd.o \
 ./Src/CommControl/FoodWnd.o \
+../Src/CommControl/SearchTypeBar.o \
 ./Src/CommControl/WaitingWnd.o
 
 CPP_DEPS += \
@@ -109,6 +111,7 @@ CPP_DEPS += \
 ./Src/CommControl/PromptMsg.d \
 ./Src/CommControl/ShopWnd.d \
 ./Src/CommControl/FoodWnd.d \
+../Src/CommControl/SearchTypeBar.d \
 ./Src/CommControl/WaitingWnd.d
 
 
