@@ -104,6 +104,7 @@ Src/Settings/SettingsFragment.d Src/Settings/SettingsFragment.o: \
  ../Src/Settings/../CommControl/AlbumSongFragment.h \
  ../Src/Settings/../CommControl/SongListFragment.h \
  ../Src/Settings/../CommControl/SongListCtrl.h \
+ ../Src/Settings/../CommControl/SearchTypeBar.h \
  ../Src/Settings/../CommControl/CloudDownLoadPromptWnd.h \
  ../Src/Settings/../CommControl/../Settings/SettingsFragment.h \
  ../Src/Settings/../CommControl/SelectedFragment.h \
@@ -374,6 +375,8 @@ Src/Settings/SettingsFragment.d Src/Settings/SettingsFragment.o: \
 ../Src/Settings/../CommControl/SongListFragment.h:
 
 ../Src/Settings/../CommControl/SongListCtrl.h:
+
+../Src/Settings/../CommControl/SearchTypeBar.h:
 
 ../Src/Settings/../CommControl/CloudDownLoadPromptWnd.h:
 

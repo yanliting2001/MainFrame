@@ -84,6 +84,9 @@ Src/UDisk/UDiskFragment.d Src/UDisk/UDiskFragment.o: \
  ../Src/UDisk/../CommControl/AlbumSongFragment.h \
  ../Src/UDisk/../CommControl/SongListFragment.h \
  ../Src/UDisk/../CommControl/SongListCtrl.h \
+ ../Src/UDisk/../CommControl/SearchTypeBar.h \
+ ../Src/UDisk/../CommControl/../SQL/SearchSQL.h \
+ ../Src/UDisk/../CommControl/../SQL/FastSearch.h \
  ../Src/UDisk/../CommControl/CloudDownLoadPromptWnd.h \
  ../Src/UDisk/../CommControl/../Settings/SettingsFragment.h \
  ../Src/UDisk/../CommControl/../Settings/SettingInputWnd.h \
@@ -96,8 +99,6 @@ Src/UDisk/UDiskFragment.d Src/UDisk/UDiskFragment.o: \
  ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/MusicLibItemWnd.h \
  ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/SetMusicLibWnd.h \
  ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/SelectMusicItem.h \
- ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/SearchSQL.h \
- ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/FastSearch.h \
  ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKInputPanel.h \
  ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKSpellInputWnd.h \
  ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKHandWriteInputWnd.h \
@@ -335,6 +336,12 @@ Src/UDisk/UDiskFragment.d Src/UDisk/UDiskFragment.o: \
 
 ../Src/UDisk/../CommControl/SongListCtrl.h:
 
+../Src/UDisk/../CommControl/SearchTypeBar.h:
+
+../Src/UDisk/../CommControl/../SQL/SearchSQL.h:
+
+../Src/UDisk/../CommControl/../SQL/FastSearch.h:
+
 ../Src/UDisk/../CommControl/CloudDownLoadPromptWnd.h:
 
 ../Src/UDisk/../CommControl/../Settings/SettingsFragment.h:
@@ -358,10 +365,6 @@ Src/UDisk/UDiskFragment.d Src/UDisk/UDiskFragment.o: \
 ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/SetMusicLibWnd.h:
 
 ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/SelectMusicItem.h:
-
-../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/SearchSQL.h:
-
-../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/FastSearch.h:
 
 ../Src/UDisk/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKInputPanel.h:
 

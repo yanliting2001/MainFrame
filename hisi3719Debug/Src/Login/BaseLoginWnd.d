@@ -83,6 +83,9 @@ Src/Login/BaseLoginWnd.d Src/Login/BaseLoginWnd.o: \
  ../Src/Login/../CommControl/AlbumSongFragment.h \
  ../Src/Login/../CommControl/SongListFragment.h \
  ../Src/Login/../CommControl/SongListCtrl.h \
+ ../Src/Login/../CommControl/SearchTypeBar.h \
+ ../Src/Login/../CommControl/../SQL/SearchSQL.h \
+ ../Src/Login/../CommControl/../SQL/FastSearch.h \
  ../Src/Login/../CommControl/CloudDownLoadPromptWnd.h \
  ../Src/Login/../CommControl/../Settings/SettingsFragment.h \
  ../Src/Login/../CommControl/../Settings/SettingInputWnd.h \
@@ -95,8 +98,6 @@ Src/Login/BaseLoginWnd.d Src/Login/BaseLoginWnd.o: \
  ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/MusicLibItemWnd.h \
  ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/SetMusicLibWnd.h \
  ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/SelectMusicItem.h \
- ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/SearchSQL.h \
- ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/FastSearch.h \
  ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKInputPanel.h \
  ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKSpellInputWnd.h \
  ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKHandWriteInputWnd.h \
@@ -329,6 +330,12 @@ Src/Login/BaseLoginWnd.d Src/Login/BaseLoginWnd.o: \
 
 ../Src/Login/../CommControl/SongListCtrl.h:
 
+../Src/Login/../CommControl/SearchTypeBar.h:
+
+../Src/Login/../CommControl/../SQL/SearchSQL.h:
+
+../Src/Login/../CommControl/../SQL/FastSearch.h:
+
 ../Src/Login/../CommControl/CloudDownLoadPromptWnd.h:
 
 ../Src/Login/../CommControl/../Settings/SettingsFragment.h:
@@ -352,10 +359,6 @@ Src/Login/BaseLoginWnd.d Src/Login/BaseLoginWnd.o: \
 ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/SetMusicLibWnd.h:
 
 ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/SelectMusicItem.h:
-
-../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/SearchSQL.h:
-
-../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/FastSearch.h:
 
 ../Src/Login/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKInputPanel.h:
 

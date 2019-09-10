@@ -82,6 +82,9 @@ Src/Settings/SettingPublicWnd.d Src/Settings/SettingPublicWnd.o: \
  ../Src/Settings/../CommControl/AlbumSongFragment.h \
  ../Src/Settings/../CommControl/SongListFragment.h \
  ../Src/Settings/../CommControl/SongListCtrl.h \
+ ../Src/Settings/../CommControl/SearchTypeBar.h \
+ ../Src/Settings/../CommControl/../SQL/SearchSQL.h \
+ ../Src/Settings/../CommControl/../SQL/FastSearch.h \
  ../Src/Settings/../CommControl/CloudDownLoadPromptWnd.h \
  ../Src/Settings/../CommControl/../Settings/SettingsFragment.h \
  ../Src/Settings/../CommControl/../Settings/SettingInputWnd.h \
@@ -94,8 +97,6 @@ Src/Settings/SettingPublicWnd.d Src/Settings/SettingPublicWnd.o: \
  ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/MusicLibItemWnd.h \
  ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/SetMusicLibWnd.h \
  ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/SelectMusicItem.h \
- ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/SearchSQL.h \
- ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/FastSearch.h \
  ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKInputPanel.h \
  ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKSpellInputWnd.h \
  ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKHandWriteInputWnd.h \
@@ -326,6 +327,12 @@ Src/Settings/SettingPublicWnd.d Src/Settings/SettingPublicWnd.o: \
 
 ../Src/Settings/../CommControl/SongListCtrl.h:
 
+../Src/Settings/../CommControl/SearchTypeBar.h:
+
+../Src/Settings/../CommControl/../SQL/SearchSQL.h:
+
+../Src/Settings/../CommControl/../SQL/FastSearch.h:
+
 ../Src/Settings/../CommControl/CloudDownLoadPromptWnd.h:
 
 ../Src/Settings/../CommControl/../Settings/SettingsFragment.h:
@@ -349,10 +356,6 @@ Src/Settings/SettingPublicWnd.d Src/Settings/SettingPublicWnd.o: \
 ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/SetMusicLibWnd.h:
 
 ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/SelectMusicItem.h:
-
-../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/SearchSQL.h:
-
-../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/../SQL/FastSearch.h:
 
 ../Src/Settings/../CommControl/../Settings/../AdvanceSettingsWnd/Input/BKInputPanel.h:
 

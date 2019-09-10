@@ -92,6 +92,7 @@ Src/AdvanceSettingsWnd/MusicLibItemWnd.d \
  ../Src/AdvanceSettingsWnd/../CommControl/AlbumSongFragment.h \
  ../Src/AdvanceSettingsWnd/../CommControl/SongListFragment.h \
  ../Src/AdvanceSettingsWnd/../CommControl/SongListCtrl.h \
+ ../Src/AdvanceSettingsWnd/../CommControl/SearchTypeBar.h \
  ../Src/AdvanceSettingsWnd/../CommControl/CloudDownLoadPromptWnd.h \
  ../Src/AdvanceSettingsWnd/../CommControl/../Settings/SettingsFragment.h \
  ../Src/AdvanceSettingsWnd/../CommControl/../Settings/SettingInputWnd.h \
@@ -342,6 +343,8 @@ Src/AdvanceSettingsWnd/MusicLibItemWnd.d \
 ../Src/AdvanceSettingsWnd/../CommControl/SongListFragment.h:
 
 ../Src/AdvanceSettingsWnd/../CommControl/SongListCtrl.h:
+
+../Src/AdvanceSettingsWnd/../CommControl/SearchTypeBar.h:
 
 ../Src/AdvanceSettingsWnd/../CommControl/CloudDownLoadPromptWnd.h:
 
