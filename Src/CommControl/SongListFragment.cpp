@@ -243,13 +243,19 @@ void CSongListFragment::OnClick(CBaseWnd *pWnd, POINT pt)
 
 void CSongListFragment::OnSearchItemChange()
 {
-	if ( !mCurSearchType ) return;
+	SEARCHITEM *pSearchItem = mSearchTypeBar.GetSelectedSubItem();
+
+	if (!pSearchItem)
+	{
+		return;
+	}
+	//if ( !mCurSearchType ) return;
 
 	SEARCHINFO searchinfo={"\0", INPUTMETHODTYPE_SPELL, WordLength_All};
 	gMainCtrlPage->mSearchInputWnd.GetSearchInfo(&searchinfo);
 
 	DbgOutput(DBG_INFO, "type:%d, OnSearchItemChange: item=%s, input=%s, depth=%d\n",
-			mCurSearchType->eType, mCurSearchType->cItemName, searchinfo.cInputContent, mCurSearchType->nDepth);
+			pSearchItem->eType, pSearchItem->cItemName, searchinfo.cInputContent, pSearchItem->nDepth);
 
 	UINT64 uTime0 = GetTickCount();
 	mSongListCtrl.DestroyE3DListView();
@@ -264,7 +270,7 @@ void CSongListFragment::OnSearchItemChange()
 	if (mCurSearchType->eType == SearchBySongType)
 	{
 		FastSearch_SearchSongListBySongType(
-			&mCurSearchType->nDepth,
+			pSearchItem->nDepth,
 			&searchinfo,
 			&sSongList);
 	}
@@ -277,28 +283,28 @@ void CSongListFragment::OnSearchItemChange()
 	else if (mCurSearchType->eType == SearchByLanguageType)
 	{
 		FastSearch_SearchSongListByLanguageType(
-			&mCurSearchType->nDepth,
+			pSearchItem->nDepth,
 			&searchinfo,
 			&sSongList);
 	}
 	else if ( mCurSearchType->eType == SearchByRank )
 	{
 		FastSearch_SearchSongListByRanking(
-				&mCurSearchType->nDepth,
+				pSearchItem->nDepth,
 				&searchinfo,
 				&sSongList);
 	} 
   else if ( mCurSearchType->eType == SearchByMonth)
 	{
 		FastSearch_SearchSongListByCloud(
-				&mCurSearchType->nDepth,
+				pSearchItem->nDepth,
 				&searchinfo,
 				&sSongList);
 	}
 	else if ( mCurSearchType->eType == SearchBySinger)
 	{
 		FastSearch_SearchSongListBySingerName(
-				&mCurSearchType->nDepth,
+				pSearchItem->nDepth,
 				&searchinfo,
 				&sSongList);
 	}
