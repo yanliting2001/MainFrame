@@ -36,6 +36,11 @@ void CSingerListFragment::Create(CBaseWnd *pParent)
 
 	mPageInfoWnd.CreateStatic(this, rcListCtrl);
 
+	RECT rcSearchType;
+	SetRectXY(&rcSearchType, 0, 35, LAYOUT_WIDTH, 40);
+	mSearchTypeBar.Create(this, rcSearchType);
+	mSearchTypeBar.SetMsgRecvWnd(this);
+
 	LoadResource();
 }
 
@@ -72,21 +77,24 @@ void CSingerListFragment::LoadResource()
 
 	XmlLoadRect(&parser, "ListCtrlLocation", &rcControl);
 	mSingerListCtrl.MoveWindow(&rcControl);
+	
+	XmlLoadRect(&parser, "SearchTypeLocation", &rcControl);
+	mSearchTypeBar.MoveWindow(&rcControl);
 
 	XmlLoadRect(&parser, "ReturnBtnInfo", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("ReturnBtnInfo", "path", "FragmentPublic/ReturnBtn"), sizeof(imgPath));
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("ReturnBtnInfo", "path", "FragmentPublic/Return"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, btnTextures);
 	mReturnBtn.SetTextures(btnTextures);
 	mReturnBtn.MoveWindow(&rcControl);
 
 	XmlLoadRect(&parser, "PrevPageBtnInfo", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("PrevPageBtnInfo", "path", "FragmentPublic/ReturnBtn"), sizeof(imgPath));
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("PrevPageBtnInfo", "path", "FragmentPublic/PrevPage"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, btnTextures);
 	mPrevPageBtn.SetTextures(btnTextures);
 	mPrevPageBtn.MoveWindow(&rcControl);
 
 	XmlLoadRect(&parser, "NextPageBtnInfo", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("NextPageBtnInfo", "path", "FragmentPublic/ReturnBtn"), sizeof(imgPath));
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("NextPageBtnInfo", "path", "FragmentPublic/NextPage"), sizeof(imgPath));
 	CreateBtnImgTextures(imgPath, btnTextures);
 	mNextPageBtn.SetTextures(btnTextures);
 	mNextPageBtn.MoveWindow(&rcControl);
@@ -181,18 +189,49 @@ void CSingerListFragment::OnClick(CBaseWnd *pWnd, POINT pt)
 	}
 }
 
+void CSingerListFragment::OnPositionChange(
+	CBaseWnd *pWnd,
+	int nOldPosition,
+	int nNewPostion,
+	BOOL bChangeEnd)
+{
+	int nPos = nNewPostion;
+
+	int nCountPerPage = mSingerListCtrl.GetCountPerPage();
+
+	if (bChangeEnd)
+	{
+		int nItemIndex = nPos *nCountPerPage;
+
+		mSingerListCtrl.SetFirstItemIndex(nItemIndex);
+		mSingerListCtrl.StartFadeInEffect();
+	}
+	else
+	{
+		int nPageCount = mSingerListCtrl.GetPageCount();
+
+		//mPagePrompt.SetListPageInfo(nPos+1, nPageCount);
+	}
+}
+
+
 void CSingerListFragment::OnSearchItemChange()
 {
+	SEARCHITEM *pSearchItem = mSearchTypeBar.GetSelectedSubItemForSinger();
+	if (!pSearchItem)
+	{
+		return;
+	}
 	SEARCHINFO searchinfo={"\0", INPUTMETHODTYPE_SPELL, WordLength_All};
 	gMainCtrlPage->mSearchInputWnd.GetSearchInfo(&searchinfo);
 
-	DbgOutput(DBG_INFO, "OnSearchItemChange: item=%s, input=%s\n", mTypeName, searchinfo.cInputContent);
+	DbgOutput(DBG_INFO, "OnSearchItemChange: item=%s, input=%s\n", pSearchItem->cItemName, searchinfo.cInputContent);
 
 	mSingerListCtrl.DestroyE3DListView();
 	mSingerListCtrl.DelAllItem();
 
 	CPtrArrayCtrl sSingerList;
-	FastSearch_SearchSingerListBySingerType(mTypeName, &searchinfo, &sSingerList);
+	FastSearch_SearchSingerListBySingerType(pSearchItem->cItemName, &searchinfo, &sSingerList);
 
 	int nSingerCount = sSingerList.GetCount();
 	SetSingerCount(nSingerCount);
@@ -224,12 +263,17 @@ void CSingerListFragment::OnListCtrlItemClicked(int nItemIndex, int nSubItemInde
 			SINGERINFO *pSingerInfo = (SINGERINFO *) (pli->uItemData);
 			if ( pSingerInfo )
 			{
+				/*
 				static SEARCHITEM search;
 				search.eType = SearchBySinger;
 				search.nDepth = pSingerInfo->id;
 				search.pParentItem = NULL;
 				SAFE_STRNCPY(search.cItemName, pSingerInfo->cName, sizeof(search.cItemName));
 				gSongListFragment->SetSearchBarItem(&search, 0);
+				*/
+				SEARCHITEM *pSearchItem = mSearchTypeBar.GetSelectedSubItemForSinger();
+				UpdateSubSearchType(pSearchItem);
+				gSongListFragment->SetSearchBarItem(pSearchItem, nItemIndex);
 				gMainCtrlPage->SetCurrentFragment(Fragment_SongList);
 //
 //				gMainCtrlPage->SetSelectedSingerInfo(pSingerInfo);
@@ -251,10 +295,30 @@ void CSingerListFragment::OnListCtrlFirstItemChange(int nItemIndex)
 	//mPageCountSlide.SetPos(nPageIndex);
 }
 
-void CSingerListFragment::SetSearchBarItem(const char *cTypeName)
+void CSingerListFragment::SetSearchBarItem(
+	SEARCHITEM *pSearchItem,
+	int nFirstShowItemIndex)
 {
-	if ( !cTypeName ) return ;
-	SAFE_STRNCPY(mTypeName, cTypeName, sizeof(mTypeName));
+	mSearchTypeBar.SetSearchItem(pSearchItem, nFirstShowItemIndex);
+	/*
+	SEARCHITEM *pRoot = pSearchItem;
+	while (pRoot->pParentItem)
+	{
+		pRoot = pRoot->pParentItem;
+
+		CBaseStringA sTmp(&sPrompt);
+		sPrompt.Format("%s->%s", pRoot->cItemName, sTmp.GetString());
+	}
+	*/
+
+	//modify by yq,2013-01-24
+//	mSearchPrompt.SetWindowTextA(sPrompt.GetString());
+//	mPrompt.Set(sPrompt.GetString());
+	//end modify by yq,2013-01-24
+
+	DbgOutput(DBG_DEBUG, "search depth = %d, type = %d\n",
+		 	pSearchItem->nDepth, pSearchItem->eType);
+
 	gMainCtrlPage->mSearchInputWnd.ResetSearchInfo();
 	OnSearchItemChange();
 

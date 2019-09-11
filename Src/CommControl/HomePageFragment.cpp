@@ -304,7 +304,16 @@ void CHomePageFragment::OnClickItem(HOMEPAGESELECTTYPE_E type)
 		break;
     
 	case selectType_singer:
-		gMainCtrlPage->SetCurrentFragment(Fragment_SingerType);
+		//gMainCtrlPage->SetCurrentFragment(Fragment_SingerType);
+		if ( gs_SystemSetting.miLanguageID == LanguageID_Chinese )
+		{
+			gSingerListFragment->SetSearchBarItem(&gSearchSingerType, 0);
+		}
+		else
+		{
+			gSingerListFragment->SetSearchBarItem(&gSearchESingerType, 0);
+		}
+		gMainCtrlPage->SetCurrentFragment(Fragment_SingerList);
 		break;
 	case selectType_songName:
 		gSongListFragment->SetSearchBarItem(&gSearchLanguageType, 0);

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "BaseButton.h"
+#include "BaseSlide.h"
 #include "SingerListCtrl.h"
+#include "SearchTypeBar.h"
 #include "FragmentInterface.h"
 
 class CSingerListFragment: public CFragment,
@@ -44,6 +46,7 @@ private:
 private:
 	CBaseButton	mReturnBtn;
 	CSingerListCtrl mSingerListCtrl;
+	CSearchTypeBar mSearchTypeBar;
 	char mTypeName[32];
 
 	CBaseButton mPrevPageBtn;
