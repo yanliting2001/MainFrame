@@ -263,58 +263,58 @@ void CSongListFragment::OnSearchItemChange()
 
 	UINT64 uTime1 = GetTickCount();
 
-	DbgOutput(DBG_DEBUG, "Release list item used %d ms\n", uTime1-uTime0);
+	DbgOutput(DBG_INFO, "Release list item used %d ms\n", uTime1-uTime0);
 
 	CPtrArrayCtrl sSongList;
 
-	if (mCurSearchType->eType == SearchBySongType)
+	if (pSearchItem->eType == SearchBySongType)
 	{
 		FastSearch_SearchSongListBySongType(
-			pSearchItem->nDepth,
+			&pSearchItem->nDepth,
 			&searchinfo,
 			&sSongList);
 	}
-	else if (mCurSearchType->eType == SearchByName)
+	else if (pSearchItem->eType == SearchByName)
 	{
 		FastSearch_SearchSongListBySongName(
 			&searchinfo,
 			&sSongList);
 	}
-	else if (mCurSearchType->eType == SearchByLanguageType)
+	else if (pSearchItem->eType == SearchByLanguageType)
 	{
 		FastSearch_SearchSongListByLanguageType(
-			pSearchItem->nDepth,
+			&pSearchItem->nDepth,
 			&searchinfo,
 			&sSongList);
 	}
-	else if ( mCurSearchType->eType == SearchByRank )
+	else if ( pSearchItem->eType == SearchByRank )
 	{
 		FastSearch_SearchSongListByRanking(
-				pSearchItem->nDepth,
+				&pSearchItem->nDepth,
 				&searchinfo,
 				&sSongList);
 	} 
-  else if ( mCurSearchType->eType == SearchByMonth)
+  else if ( pSearchItem->eType == SearchByMonth)
 	{
 		FastSearch_SearchSongListByCloud(
-				pSearchItem->nDepth,
+				&pSearchItem->nDepth,
 				&searchinfo,
 				&sSongList);
 	}
-	else if ( mCurSearchType->eType == SearchBySinger)
+	else if ( pSearchItem->eType == SearchBySinger)
 	{
 		FastSearch_SearchSongListBySingerName(
-				pSearchItem->nDepth,
+				&pSearchItem->nDepth,
 				&searchinfo,
 				&sSongList);
 	}
-	else if (mCurSearchType->eType == SearchByNewSong)
+	else if (pSearchItem->eType == SearchByNewSong)
 	{
 		FastSearch_SearchNewSongList(
 			&searchinfo,
 			&sSongList);
 	}
-  else if (mCurSearchType->eType == SearchBYGradeSong)
+  else if (pSearchItem->eType == SearchBYGradeSong)
 	{
 		FastSearch_SearchGradeSongList(
 			&searchinfo,
@@ -323,7 +323,7 @@ void CSongListFragment::OnSearchItemChange()
 
 	UINT64 uTime2 = GetTickCount();
 
-	DbgOutput(DBG_DEBUG, "Search Item used %d ms\n", uTime2-uTime1);
+	DbgOutput(DBG_INFO, "Search Item used %d ms\n", uTime2-uTime1);
 
 	int nSongCount = sSongList.GetCount();
 	SetSongCount(nSongCount);
@@ -339,16 +339,18 @@ void CSongListFragment::OnSearchItemChange()
 
 	UINT64 uTime3 = GetTickCount();
 
-	DbgOutput(DBG_DEBUG, "Add Item To List used %d ms\n", uTime3-uTime2);
+	DbgOutput(DBG_INFO, "Add Item To List used %d ms\n", uTime3-uTime2);
 
 	int nPageCount = mSongListCtrl.GetPageCount();
+	DbgOutput(DBG_INFO, "nPageCount %d \n", nPageCount);
 	int nPageIndex = mSongListCtrl.GetCurPageIndex();
+	DbgOutput(DBG_INFO, "nPageIndex %d \n", nPageIndex);
 	//mPagePrompt.SetListPageInfo(nPageCount>0?nPageIndex+1:0, nPageCount);
 	SetPageCountInfo(nPageCount>0?nPageIndex+1:0, nPageCount);
 
 	UINT64 uTime4 = GetTickCount();
 
-	DbgOutput(DBG_DEBUG, "OnSearchItemChange: total used %llu ms, system tick is %llu\n",
+	DbgOutput(DBG_INFO, "OnSearchItemChange: total used %llu ms, system tick is %llu\n",
 		uTime4-uTime0, uTime4);
 }
 
@@ -394,9 +396,9 @@ void CSongListFragment::OnSongItemStateChange(int nItemIndex)
 
 		mSongListCtrl.SetItemColor(nItemIndex, lviSongSongName, uSongNameColor);
 		mSongListCtrl.SetItemColor(nItemIndex, lviSongSingerName, uSingerNameColor);
-		if ( mCurSearchType->eType == SearchByRank )
-			mSongListCtrl.SetItemTexture(nItemIndex, lviSongBackground, mSongListCtrl.GetSongBkImageTexture(pSongInfo, nItemIndex));
-		else
+		//if ( mCurSearchType->eType == SearchByRank )
+			//mSongListCtrl.SetItemTexture(nItemIndex, lviSongBackground, mSongListCtrl.GetSongBkImageTexture(pSongInfo, nItemIndex));
+		//else
 			mSongListCtrl.SetItemTexture(nItemIndex, lviSongBackground, mSongListCtrl.GetSongBkImageTexture(pSongInfo));
 	}
 }
