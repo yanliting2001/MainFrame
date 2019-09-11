@@ -34,7 +34,7 @@ private:
 	void OnListCtrlFirstItemChange(int nItemIndex);
 
 public:
-	void SetSearchBarItem(const char *cTypeName);
+	void SetSearchBarItem(SEARCHITEM *pSearchItem,int nFirstShowItemIndex);
 	void SetSingerCount(	int nSingerCount);
 	void AddSingerItem(const SINGERINFO *pSinger, int nIndex);
 
