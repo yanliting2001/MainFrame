@@ -170,7 +170,15 @@ void CSearchInputWnd::OnClick(
 				}
 				else if ( fragmentType == Fragment_SingerType )
 				{
-					gSingerListFragment->SetSearchBarItem("所有");
+					//gSingerListFragment->SetSearchBarItem("所有");
+					if ( gs_SystemSetting.miLanguageID == LanguageID_Chinese )
+					{
+						gSingerListFragment->SetSearchBarItem(&gSearchSingerType, 0);
+					}
+					else
+					{
+						gSingerListFragment->SetSearchBarItem(&gSearchESingerType, 0);
+					}
 					gMainCtrlPage->SetCurrentFragment(Fragment_SingerList);
 				}
 //				ShowPromptText(TRUE);
