@@ -27,6 +27,7 @@ public:
 	virtual BOOL OnReturn();
 
 private:
+	void OnPositionChange(CBaseWnd *pWnd,int nOldPosition,int nNewPostion,BOOL bChangeEnd);
 	void OnSearchItemChange();
 
 	void OnListCtrlItemClicked(int nItemIndex, int nSubItemIndex);

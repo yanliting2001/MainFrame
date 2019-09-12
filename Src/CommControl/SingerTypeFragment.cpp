@@ -257,7 +257,7 @@ void CSingerTypeFragment::OnClick(CBaseWnd *pWnd, POINT pt)
 	else */if ( nWndID >= BTN_ITEM_BASE_ID && nWndID < (BTN_ITEM_BASE_ID+singerType_count) )
 	{
 		int nClickID = nWndID - BTN_ITEM_BASE_ID;
-		gSingerListFragment->SetSearchBarItem(mTypesID[nClickID].typeName);
+		//gSingerListFragment->SetSearchBarItem(mTypesID[nClickID].typeName);
 		gMainCtrlPage->SetCurrentFragment(Fragment_SingerList);
 	}
 }
