@@ -22,12 +22,12 @@ CSongListFragment::~CSongListFragment()
 
 void CSongListFragment::Create(CBaseWnd *pParent)
 {
-	RECT rc = {0, 55, LAYOUT_WIDTH, 620};
+	RECT rc = {0, 55, LAYOUT_WIDTH, 960};
 
 	CParentClass::Create("SongListFragment", pParent, rc, WINDOWFLAG_DEFAULT, WINDOWSTATE_INVISIBLE);
 
 	RECT rcListCtrl;
-	SetRectXY(&rcListCtrl, 10, 75, 1260, 459);
+	SetRectXY(&rcListCtrl, 10, 75, 1520, 689);
 
 	mSongListCtrl.SetItemSize(413, 153);
 	mSongListCtrl.SetItemSpace(7, 0);

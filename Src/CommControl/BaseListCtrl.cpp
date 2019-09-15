@@ -1328,7 +1328,7 @@ void CBaseListCtrl::ComputeItemPosition()
 	mColCount = nWidth / (mItemWidth + mItemXSpace) ;
 	mRowCount = nHeight  / (mItemHeight + mItemYSpace) ;
 	mCountPerPage = mColCount * mRowCount;
-
+	DbgOutput(DBG_INFO, "ItemPosition nWidth=%d,nHeight=%d, mColCount: %d,mRowCount:%d,mCountPerPage:%d\n",nWidth,nHeight,mColCount,mRowCount,mCountPerPage);
 	mListCtrlRect.left = mWndRect.left;
 	mListCtrlRect.top = mWndRect.top;
 	mListCtrlRect.right = mListCtrlRect.left + mColCount *  (mItemWidth + mItemXSpace) ;
