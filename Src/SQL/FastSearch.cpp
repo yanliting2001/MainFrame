@@ -2376,4 +2376,19 @@ void SaveSongListToPublicSong(CPtrListCtrl *pSongList)
 
 	FastSearch_SavePubBroadCast();
 }
+char *FastSearch_GetLanguageTypeNameByID(int id)
+{
+	CPtrListCtrl *pList = NULL;
+	pList = &gSearchLanguageType.sChildItemList;
+	int count = pList->GetCount();
+	for(int i=0;i<count;i++)
+	{
+		SEARCHITEM *pSubItem = (SEARCHITEM *)pList->GetAt(i);
+		//printf("cType =%s\n",pSubItem->cItemName);
+		if(pSubItem->id==id){
+			return pSubItem->cItemName;
+		}
+	}
+	return NULL;
+}
 

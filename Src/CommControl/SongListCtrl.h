@@ -6,8 +6,9 @@
 typedef enum eSONGLISTVIEW_ITEM
 {
 	lviSongBackground = 0,
-	//lviSongItemImage,
+	lviSongItemImage,
 	lviSongSongName,
+	lviLanguageType,
 	lviSongSingerName,
 	lviSongFavoritBtn,
 	lviSongRushBtn,
@@ -72,9 +73,10 @@ private:
 	SONGBKIMAGETYPE GetSongBkImageType(SONGINFO *pSongInfo);
 
 private:
-	//RECT mItemImageRect;
+	RECT mItemImageRect;
 	RECT mSongNameRect;
 	RECT mSingerNameRect;
+	RECT mLanguageTypeRect;
 	RECT mFavoritBtnRect;
 	RECT mRushBtnRect;
 	RECT mDelBtnRect;

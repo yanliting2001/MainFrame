@@ -239,6 +239,7 @@ void SaveSongListToPublicSong(CPtrListCtrl *pSongList);
 #if USE_NEW_GEN_RANK
  void GenerateAllRankSongList();
  void AfreshAllRankSongListforClick();
+ char *FastSearch_GetLanguageTypeNameByID(int id);
 
 #endif
 

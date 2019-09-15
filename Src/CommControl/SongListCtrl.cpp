@@ -21,14 +21,15 @@ int FindItemBySongID(const LISTITEM *pItem, const void *pData)
 
 CSongListCtrl::CSongListCtrl()
 {
-	//SetRectXY(&mItemImageRect, 32, 16, 150, 85);
+	SetRectXY(&mItemImageRect, 32, 16, 150, 85);
 	SetRectXY(&mSongNameRect, 222, 30, 170, 68);
+	SetRectXY(&mLanguageTypeRect, 222, 98, 170, 34);
 	SetRectXY(&mSingerNameRect, 222, 98, 170, 34);
 	SetRectXY(&mFavoritBtnRect, 17, 112, 59, 24);
 	SetRectXY(&mRushBtnRect, 77, 112, 59, 24);
 	SetRectXY(&mDelBtnRect, 137, 112, 59, 24);
-  SetRectXY(&mCloudBtnRect, 137, 80, 59, 24);
-  SetRectXY(&mGradeBtnRect, 100, 80, 59, 24);
+  	SetRectXY(&mCloudBtnRect, 137, 80, 59, 24);
+  	SetRectXY(&mGradeBtnRect, 100, 80, 59, 24);
   
 	//SetRectXY(&mPreviewRect, 137, 112, 59, 24);
 
@@ -72,13 +73,14 @@ void CSongListCtrl::LoadResource()
 	}
 
 	// read from xml
-	//XmlLoadRect(&parser, "ItemImageRectLocation", &mItemImageRect);
+	XmlLoadRect(&parser, "ItemImageRectLocation", &mItemImageRect);
 	XmlLoadRect(&parser, "SongNameRectLocation", &mSongNameRect);
+	XmlLoadRect(&parser, "LanguageTypeRectLocation", &mLanguageTypeRect);
 	XmlLoadRect(&parser, "SingerNameRectLocation", &mSingerNameRect);
 	XmlLoadRect(&parser, "FavoritBtnRectLocation", &mFavoritBtnRect);
 	XmlLoadRect(&parser, "RushBtnRectLocation", &mRushBtnRect);
-  XmlLoadRect(&parser, "DelBtnRectLocation", &mDelBtnRect);
-  XmlLoadRect(&parser, "CloudBtnRectLocation", &mCloudBtnRect);
+  	XmlLoadRect(&parser, "DelBtnRectLocation", &mDelBtnRect);
+  	XmlLoadRect(&parser, "CloudBtnRectLocation", &mCloudBtnRect);
 	XmlLoadRect(&parser, "GradeBtnRectLocation", &mGradeBtnRect);
 	mSongSize = parser.GetIntValue("SongNameRectLocation", "size", 25);
 	mSingerSize = parser.GetIntValue("SingerNameRectLocation", "size", 18);
@@ -156,13 +158,17 @@ int CSongListCtrl::GetSubItemCount()
 
 int CSongListCtrl::GetSubItemByPoint(POINT pt)
 {
-	/*if (PtInRect(&mItemImageRect, pt))
+	if (PtInRect(&mItemImageRect, pt))
 	{
 		return lviSongItemImage;
 	}
-	else */if (PtInRect(&mSongNameRect, pt))
+	else if (PtInRect(&mSongNameRect, pt))
 	{
 		return lviSongSongName;
+	}
+	else if()
+	{
+		return lviLanguageType;
 	}
 	else if (PtInRect(&mSingerNameRect, pt))
 	{
@@ -250,10 +256,10 @@ void CSongListCtrl::GetFixedSubItemInfo(int nItemIndex)
   	pli->pSubItem[lviSongGradeBtn].drawCircle = FALSE;
   }
 
-//	pli->pSubItem[lviSongItemImage].font = FALSE;
-//	pli->pSubItem[lviSongItemImage].color = 0xFFFFFFFF;
-//	pli->pSubItem[lviSongItemImage].drawCircle = FALSE;
-//
+	pli->pSubItem[lviSongItemImage].font = FALSE;
+	pli->pSubItem[lviSongItemImage].color = 0xFFFFFFFF;
+	pli->pSubItem[lviSongItemImage].drawCircle = FALSE;
+
 //	pli->pSubItem[lviPreview].texture.SetTexture(&(mPreviewTextures[0]));
 //	CopyRect(&(pli->pSubItem[lviPreview].rect), &mPreviewRect);
 //	pli->pSubItem[lviPreview].font = FALSE;
@@ -320,6 +326,28 @@ void CSongListCtrl::GetUnFixedSubItemInfo(int nItemIndex)
 //	}
 //	CopyRect(&(pli->pSubItem[lviSongItemImage].rect), &mItemImageRect);
 
+	const char *cSingerPath = theBaseApp->GetSingerTextureFolder();
+	char cTemp[MAX_PATH];
+	memset(cTemp,0,MAX_PATH);
+	char cImgPath[MAX_PATH];
+	if (pSongInfo && !pli->pSubItem[lviSongItemImage].texture.HasTexture())
+	{
+		sprintf(cImgPath,"%d.jpg", pSongInfo->singerID);
+		CombinePathName(cTemp, cSingerPath, cImgPath);
+
+		if(cTemp && strlen(cTemp)>0)
+		{
+			if (!IsFileExist(cTemp))
+			{
+				sprintf(cTemp, "%s/0.png", cSingerPath);
+			}
+			pli->pSubItem[lviSongItemImage].texture.CreateFromImgFile(cTemp);
+		}
+	}
+	CopyRect(&(pli->pSubItem[lviSongItemImage].rect), &mItemImageRect);
+	pli->pSubItem[lviSongItemImage].font = FALSE;
+	pli->pSubItem[lviSongItemImage].color = 0xFFFFFFFF;
+
 	if (pSongInfo && strlen(pSongInfo->cName))
 	{
 		if (!pli->pSubItem[lviSongSongName].texture.HasTexture())
@@ -350,6 +378,34 @@ void CSongListCtrl::GetUnFixedSubItemInfo(int nItemIndex)
 	//nDirect = DRAWTEXT_DIRECT_CENTER|DRAWTEXT_DIRECT_VCENTER;
 	GetTextRectByDirect(mSongNameRect, szTexture.cx, szTexture.cy,
 		nDirect, &(pli->pSubItem[lviSongSongName].rect));
+
+	if(pSongInfo)
+	{
+		char *languageType = FastSearch_GetLanguageTypeNameByID(pSongInfo->langID);
+		if (!pli->pSubItem[lviLanguageType].texture.HasTexture())
+		{
+			CBaseStringW in;
+			in.Set(languageType ? languageType : "");
+
+			pli->pSubItem[lviLanguageType].texture.CreateFromText(
+				in.GetString(),
+				mSingerSize,
+				TRUE,
+				RECTWIDTH(mLanguageTypeRect),
+				RECTHEIGHT(mLanguageTypeRect));
+		}
+
+		szTexture.cx = pli->pSubItem[lviLanguageType].texture.GetImageWidth();
+		szTexture.cy = pli->pSubItem[lviLanguageType].texture.GetImageHeight();
+	}else
+	{
+		szTexture.cx = RECTWIDTH(mLanguageTypeRect);
+		szTexture.cy = RECTHEIGHT(mLanguageTypeRect);
+	}
+	nDirect = DRAWTEXT_DIRECT_LEFT|DRAWTEXT_DIRECT_VCENTER;
+	//nDirect = DRAWTEXT_DIRECT_CENTER|DRAWTEXT_DIRECT_VCENTER;
+	GetTextRectByDirect(mLanguageTypeRect, szTexture.cx, szTexture.cy,
+		nDirect, &(pli->pSubItem[lviLanguageType].rect));
 
 	if (pSongInfo )
 	{
