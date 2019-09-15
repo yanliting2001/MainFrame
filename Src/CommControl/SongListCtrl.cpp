@@ -220,12 +220,13 @@ void CSongListCtrl::GetFixedSubItemInfo(int nItemIndex)
 	pli->pSubItem[lviSongBackground].color = 0xFFFFFFFF;
 	pli->pSubItem[lviSongBackground].drawCircle = FALSE;
 
+	/*
 	pli->pSubItem[lviSongFavoritBtn].texture.SetTexture(&(mFavoritBtnTextures[0]));
 	CopyRect(&(pli->pSubItem[lviSongFavoritBtn].rect), &mFavoritBtnRect);
 	pli->pSubItem[lviSongFavoritBtn].font = FALSE;
 	pli->pSubItem[lviSongFavoritBtn].color = 0xFFFFFFFF;
 	pli->pSubItem[lviSongFavoritBtn].drawCircle = FALSE;
-
+	*/
 	pli->pSubItem[lviSongRushBtn].texture.SetTexture(&(mRushBtnTextures[0]));
 	CopyRect(&(pli->pSubItem[lviSongRushBtn].rect), &mRushBtnRect);
 	pli->pSubItem[lviSongRushBtn].font = FALSE;
@@ -247,6 +248,7 @@ void CSongListCtrl::GetFixedSubItemInfo(int nItemIndex)
   	pli->pSubItem[lviSongCloudBtn].drawCircle = FALSE;
   }
 
+/*
   if(pSongInfo->bChos == TRUE)
   {
     pli->pSubItem[lviSongGradeBtn].texture.SetTexture(&(mGradeBtnTextures[0]));
@@ -255,7 +257,7 @@ void CSongListCtrl::GetFixedSubItemInfo(int nItemIndex)
   	pli->pSubItem[lviSongGradeBtn].color = 0xFFFFFFFF;
   	pli->pSubItem[lviSongGradeBtn].drawCircle = FALSE;
   }
-
+*/
 	pli->pSubItem[lviSongItemImage].font = FALSE;
 	pli->pSubItem[lviSongItemImage].color = 0xFFFFFFFF;
 	pli->pSubItem[lviSongItemImage].drawCircle = FALSE;
