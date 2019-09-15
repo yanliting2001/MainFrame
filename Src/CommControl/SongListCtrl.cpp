@@ -166,7 +166,7 @@ int CSongListCtrl::GetSubItemByPoint(POINT pt)
 	{
 		return lviSongSongName;
 	}
-	else if()
+	else if(PtInRect(&mLanguageTypeRect,pt))
 	{
 		return lviLanguageType;
 	}

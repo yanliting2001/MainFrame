@@ -2385,7 +2385,7 @@ char *FastSearch_GetLanguageTypeNameByID(int id)
 	{
 		SEARCHITEM *pSubItem = (SEARCHITEM *)pList->GetAt(i);
 		//printf("cType =%s\n",pSubItem->cItemName);
-		if(pSubItem->id==id){
+		if(pSubItem->nDepth==id){
 			return pSubItem->cItemName;
 		}
 	}
