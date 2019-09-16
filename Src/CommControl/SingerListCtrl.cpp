@@ -45,8 +45,8 @@ void CSingerListCtrl::LoadResource()
 
 	char imgPath[64] = {0};
 
-	strcpy(imgPath, parser.GetStrValue("BkGroundImg","path","SingerList/BkGround"));
-	CreateImgTexture(imgPath, &mItemBkTexture);
+	//strcpy(imgPath, parser.GetStrValue("BkGroundImg","path","SingerList/BkGround"));
+	//CreateImgTexture(imgPath, &mItemBkTexture);
 }
 
 void CSingerListCtrl::OnDeleteItem(LISTITEM *pli)
@@ -85,10 +85,10 @@ void CSingerListCtrl::GetFixedSubItemInfo(	int nItemIndex)
 	{
 		return;
 	}
-
+	/*
 	pli->pSubItem[lviSingerBackground].texture.SetTexture(&mItemBkTexture);
 	SetRectXY(&(pli->pSubItem[lviSingerBackground].rect), 0, 0, GetItemWidth(), GetItemHeight());
-	//SetRectXY(&(pli->pSubItem[lviSingerBackground].rect), 0, 0, RECTWIDTH(mNameImageBgRect), RECTHEIGHT(mNameImageBgRect));
+	*/
 	pli->pSubItem[lviSingerBackground].font = FALSE;
 	pli->pSubItem[lviSingerBackground].color = 0xFFFFFFFF;
 	pli->pSubItem[lviSingerBackground].drawCircle = FALSE;
