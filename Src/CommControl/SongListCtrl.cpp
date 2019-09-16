@@ -275,6 +275,10 @@ void CSongListCtrl::GetFixedSubItemInfo(int nItemIndex)
 	pli->pSubItem[lviSongSingerName].font = TRUE;
 	pli->pSubItem[lviSongSingerName].color = bPlaying ? mSelectedColor:mSingerNameColor;
 	pli->pSubItem[lviSongSingerName].drawCircle = FALSE;
+
+	pli->pSubItem[lviLanguageType].font = TRUE;
+	pli->pSubItem[lviLanguageType].color = bPlaying ? mSelectedColor:mSingerNameColor;
+	pli->pSubItem[lviLanguageType].drawCircle = FALSE;
 }
 
 void CSongListCtrl::GetUnFixedSubItemInfo(int nItemIndex)

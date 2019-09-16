@@ -34,6 +34,7 @@ void CSongListFragment::Create(CBaseWnd *pParent)
 	mSongListCtrl.Create(this, rcListCtrl);
 	mSongListCtrl.SetMsgRecvWnd(this);
 
+	SetRectXY(&rcListCtrl, 10, 75, 1260, 100);
 	mReturnBtn.Create(this, rcListCtrl);
 	mReturnBtn.SetWndID(BTN_RETURN_ID);
 	mReturnBtn.SetOnClickListener(this);
