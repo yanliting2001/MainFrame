@@ -93,7 +93,7 @@ void CSingerListCtrl::GetFixedSubItemInfo(	int nItemIndex)
 	pli->pSubItem[lviSingerBackground].color = 0xFFFFFFFF;
 	pli->pSubItem[lviSingerBackground].drawCircle = FALSE;
 
-	pli->pSubItem[lviSingerItemImage].drawCircle = TRUE;
+	pli->pSubItem[lviSingerItemImage].drawCircle = FALSE;
 	pli->pSubItem[lviSingerItemImage].font = FALSE;
 	pli->pSubItem[lviSingerName].font = TRUE;
 	pli->pSubItem[lviSingerName].drawCircle = FALSE;
