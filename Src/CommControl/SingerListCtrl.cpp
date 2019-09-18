@@ -161,7 +161,7 @@ void CSingerListCtrl::GetUnFixedSubItemInfo(int nItemIndex)
 	GetTextRectByDirect(mNameRect, szTexture.cx, szTexture.cy,
 		nDirect, &(pli->pSubItem[lviSingerName].rect));
 	pli->pSubItem[lviSingerName].font = TRUE;
-	pli->pSubItem[lviSingerName].color = 0xFF637CFF;
+	pli->pSubItem[lviSingerName].color = 0xFFFFFFFF;
 }
 
 void CSingerListCtrl::AddSingerItem(const SINGERINFO *pSingerInfo, int nIndex)

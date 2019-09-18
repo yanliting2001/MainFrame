@@ -271,17 +271,17 @@ void CSingerListFragment::OnListCtrlItemClicked(int nItemIndex, int nSubItemInde
 			SINGERINFO *pSingerInfo = (SINGERINFO *) (pli->uItemData);
 			if ( pSingerInfo )
 			{
-				/*
+				
 				static SEARCHITEM search;
 				search.eType = SearchBySinger;
 				search.nDepth = pSingerInfo->id;
 				search.pParentItem = NULL;
 				SAFE_STRNCPY(search.cItemName, pSingerInfo->cName, sizeof(search.cItemName));
 				gSongListFragment->SetSearchBarItem(&search, 0);
-				*/
-				SEARCHITEM *pSearchItem = mSearchTypeBar.GetSelectedSubItemForSinger();
-				UpdateSubSearchType(pSearchItem);
-				gSongListFragment->SetSearchBarItem(pSearchItem, nItemIndex);
+				
+				//SEARCHITEM *pSearchItem = mSearchTypeBar.GetSelectedSubItemForSinger();
+				//UpdateSubSearchType(pSearchItem);
+				//gSongListFragment->SetSearchBarItem(pSearchItem, nItemIndex);
 				gMainCtrlPage->SetCurrentFragment(Fragment_SongList);
 //
 //				gMainCtrlPage->SetSelectedSingerInfo(pSingerInfo);
