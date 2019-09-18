@@ -53,4 +53,5 @@ private:
 	CBaseButton mPrevPageBtn;
 	CBaseWnd mPageInfoWnd;
 	CBaseButton mNextPageBtn;
+	CBaseWnd mTitleWnd;
 };

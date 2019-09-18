@@ -35,6 +35,8 @@ void CSingerListFragment::Create(CBaseWnd *pParent)
 	mNextPageBtn.SetOnClickListener(this);
 
 	mPageInfoWnd.CreateStatic(this, rcListCtrl);
+	mTitleWnd.CreateStatic(this, rcListCtrl);
+	
 
 	RECT rcSearchType;
 	SetRectXY(&rcSearchType, 0, 35, LAYOUT_WIDTH, 40);
@@ -74,6 +76,12 @@ void CSingerListFragment::LoadResource()
 	int itemYSpace = parser.GetIntValue("ItemSizeLocation","ySpace", 23);
 	mSingerListCtrl.SetItemSize(itemWidth, itemHeight);
 	mSingerListCtrl.SetItemSpace(itemXSpace, itemYSpace);
+
+	XmlLoadRect(&parser, "TitleWndInfo", &rcControl);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("TitleWndInfo", "path", "FragmentPublic/SingerTitle"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, btnTextures);
+	mTitleWnd.SetBackgroundTexture(btnTextures);
+	mTitleWnd.MoveWindow(&rcControl);
 
 	XmlLoadRect(&parser, "ListCtrlLocation", &rcControl);
 	mSingerListCtrl.MoveWindow(&rcControl);
