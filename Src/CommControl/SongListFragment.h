@@ -71,6 +71,7 @@ private:
 	CBaseButton mPrevPageBtn;
 	CBaseWnd mPageInfoWnd;
 	CBaseButton mNextPageBtn;
+	CBaseWnd mTitleWnd;
 
 	uint32 mSongNameColor;
 	uint32 mSingerNameColor;

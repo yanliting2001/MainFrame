@@ -52,6 +52,7 @@ void CSongListFragment::Create(CBaseWnd *pParent)
 	mSearchTypeBar.Create(this, rcSearchType);
 	mSearchTypeBar.SetMsgRecvWnd(this);
 	mPageInfoWnd.CreateStatic(this, rcListCtrl);
+	mTitleWnd.CreateStatic(this, rcListCtrl);
 
 	LoadResource();
 }
@@ -94,6 +95,12 @@ void CSongListFragment::LoadResource()
 
 	XmlLoadRect(&parser, "SearchTypeLocation", &rcControl);
 	mSearchTypeBar.MoveWindow(&rcControl);
+
+	XmlLoadRect(&parser, "TitleWndInfo", &rcControl);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("TitleWndInfo", "path", "FragmentPublic/SongTitle"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, btnTextures);
+	mTitleWnd.SetBackgroundTexture(btnTextures);
+	mTitleWnd.MoveWindow(&rcControl);
 	
 
 	XmlLoadRect(&parser, "ReturnBtnInfo", &rcControl);
