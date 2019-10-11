@@ -9,6 +9,9 @@
 #define BTN_PACKAGE_BASE_ID	0x10
 #define PACKAGE_MAX_COUNT		5		// 主页套餐4条
 
+#define BTN_FOOD_BTN_ID	0x20
+#define BTN_SHOP_BTN_ID	0x21
+
 typedef struct _tPayItemWnd
 {
 	CBaseWnd	itemBKWnd;	//
@@ -87,6 +90,8 @@ private:
 	CBaseWnd mLoginQRCodeWnd;		// 登录二维码
 	CBaseWnd mStbAddressWnd;		// 机器地址
 	CBaseWnd mWorkTimeWnd;		  // 工作时间
+	CBaseButton mFoodBtn;
+	CBaseButton mShopBtn;
 	
 	BOOL mbLoginFlag;					// 检测登录标志
   

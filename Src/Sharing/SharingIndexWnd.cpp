@@ -173,12 +173,20 @@ void CSharingIndexWnd::Create(CBaseWnd *pParent)
  	RECT rcControl;
 	SetRectXY(&rcControl, 240, 210, 800, 300);
 	mLoginQRCodeWnd.CreateStatic(this, rcControl);
-  mStbAddressWnd.CreateStatic(this, rcControl);
-  mWorkTimeWnd.CreateStatic(this, rcControl);
+  	mStbAddressWnd.CreateStatic(this, rcControl);
+  	mWorkTimeWnd.CreateStatic(this, rcControl);
 
-  mPayItemsWnd.Create(this);
+	mFoodBtn.Create(this, rcControl, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
+  	mFoodBtn.SetWndID(BTN_FOOD_BTN_ID);
+  	mFoodBtn.SetOnClickListener(this);
+
+	mShopBtn.Create(this, rcControl, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
+  	mShopBtn.SetWndID(BTN_SHOP_BTN_ID);
+  	mShopBtn.SetOnClickListener(this);
+
+  	mPayItemsWnd.Create(this);
   
-  mActivityTitle.Create(this, rcControl, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
+  	mActivityTitle.Create(this, rcControl, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
 	mActivityTitle.SetWndID(BTN_ACTIVETILE_ID);
 	mActivityTitle.SetOnClickListener(this);
   
@@ -223,6 +231,18 @@ void CSharingIndexWnd::LoadResource()
 	XmlLoadRect(&parser, "QRCodeWndInfo", &rcControl);
 	mLoginQRCodeWnd.MoveWindow(&rcControl);
 
+	XmlLoadRect(&parser, "FoodInfo", &rcControl);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("FoodInfo", "path", "Sharing/Food"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, bkTexture);
+	mFoodBtn.SetTextures(bkTexture);
+	mFoodBtn.MoveWindow(&rcControl);
+
+	XmlLoadRect(&parser, "ShopInfo", &rcControl);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("ShopInfo", "path", "Sharing/Shop"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, bkTexture);
+	mShopBtn.SetTextures(bkTexture);
+	mShopBtn.MoveWindow(&rcControl);
+
   XmlLoadRect(&parser, "StbAddressInfo", &rcControl);
 	size = parser.GetIntValue("StbAddressInfo", "size", 20);
 	SAFE_STRNCPY(colorbuf, parser.GetStrValue("StbAddressInfo", "color", "FFFFFFFF") , sizeof(colorbuf));
@@ -265,7 +285,12 @@ void CSharingIndexWnd::OnClick(CBaseWnd *pWnd, POINT pt)
       gMainCtrlPage->mActivityContentWnd.SetWindowVisible(TRUE);
       #endif
 			break;
-
+		case BTN_FOOD_BTN_ID:
+			 gMainCtrlPage->mFoodWnd.SlideShowWindow(TRUE);
+			break;
+		case BTN_SHOP_BTN_ID:
+			gMainCtrlPage->mShopWnd.SlideShowWindow(TRUE);
+			break;
 		default:
 			break;
 		}
