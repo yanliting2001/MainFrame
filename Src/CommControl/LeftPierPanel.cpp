@@ -166,6 +166,12 @@ void CLeftPierPanel::LoadResource()
 	mLeftItem[EffectPopular_item].SetTextures(bkTexture);
 	mLeftItem[EffectPopular_item].MoveWindow(&rcControl);
 
+	XmlLoadRect(&parser, "SetVolDefault", &rcControl);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("SetVolDefault", "path", "LeftPier/SetDefault"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, bkTexture);
+	mLeftItem[SetDefaultVol_item].SetTextures(bkTexture);
+	mLeftItem[SetDefaultVol_item].MoveWindow(&rcControl);
+
 
   
   	XmlLoadRect(&parser, "PayBntInfo", &rcControl);
@@ -274,6 +280,9 @@ void CLeftPierPanel::OnClick(CBaseWnd *pWnd, POINT pt)
 		break;
     	case EffectPopular_item:
 		SetTune(Vietnam_Attune,true);
+		break;
+	case SetDefaultVol_item:
+		ResetAttunement();
 		break;
       /*
     case  Push_item:
