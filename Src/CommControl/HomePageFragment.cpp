@@ -89,10 +89,17 @@ void CHomePageFragment::LoadResource()
 	mHomePageItem[selectType_album].MoveWindow(&rcControl);
 	CreateBtnImgTextures(imgPath, mAlbumTextures[0]);
 	*/
-	XmlLoadRect(&parser, "RankBtnInfo", &rcControl);
-	SAFE_STRNCPY(imgPath, parser.GetStrValue("RankBtnInfo", "path", "HomePage/Rank"), sizeof(imgPath));
-	CreateBtnImgTextures(imgPath, btnTextures);
-	mHomePageItem[selectType_rank].SetTextures(btnTextures);
+	XmlLoadRect(&parser, "RankBtnInfo1", &rcControl);
+	
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("RankBtnInfo1", "path", "HomePage/Rank"), sizeof(imgPath));
+	//CreateBtnImgTextures(imgPath, btnTextures);
+	CreateBtnImgTextures(imgPath, mAlbumTextures[0]);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("RankBtnInfo2", "path", "HomePage/Rank1"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, mAlbumTextures[1]);
+	SAFE_STRNCPY(imgPath, parser.GetStrValue("RankBtnInfo3", "path", "HomePage/Rank2"), sizeof(imgPath));
+	CreateBtnImgTextures(imgPath, mAlbumTextures[2]);
+	
+	mHomePageItem[selectType_rank].SetTextures(mAlbumTextures[0]);
 	mHomePageItem[selectType_rank].MoveWindow(&rcControl);
 	
   XmlLoadRect(&parser, "ShopBtnInfo", &rcControl);
@@ -158,7 +165,7 @@ void CHomePageFragment::LoadResource()
 
 	//SetAlbumPicByIdx(miCurAlbumIdx);
   
-//  AddTimer(START_UPDATE_PICTURE_TIME, START_UPDATE_PICTURE_TIMEOUT);
+  	AddTimer(START_UPDATE_PICTURE_TIME, START_UPDATE_PICTURE_TIMEOUT);
 }
 
 void CHomePageFragment::OnDestroy()
