@@ -9,8 +9,6 @@
 #define BTN_PACKAGE_BASE_ID	0x10
 #define PACKAGE_MAX_COUNT		5		// 主页套餐4条
 
-#define BTN_FOOD_BTN_ID	0x20
-#define BTN_SHOP_BTN_ID	0x21
 
 typedef struct _tPayItemWnd
 {
@@ -67,7 +65,10 @@ public:
 	// leftType:返回类型，是歌曲数量还是时间
 	// 0:歌曲数量  1:时长
 	int GetLeftTime(int *leftType);
-  CBaseButton mActivityTitle;                 //活动提示
+  	CBaseButton mActivityTitle;                 //活动提示
+	CBaseButton mFoodBtn;
+        CBaseButton mShopBtn;
+
 public:
 	void SetLoginQRCodeVisible(BOOL bVisible);
 
@@ -90,8 +91,6 @@ private:
 	CBaseWnd mLoginQRCodeWnd;		// 登录二维码
 	CBaseWnd mStbAddressWnd;		// 机器地址
 	CBaseWnd mWorkTimeWnd;		  // 工作时间
-	CBaseButton mFoodBtn;
-	CBaseButton mShopBtn;
 	
 	BOOL mbLoginFlag;					// 检测登录标志
   

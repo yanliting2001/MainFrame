@@ -18,7 +18,8 @@ void CShopWnd::Create(CBaseWnd *pParent)
 	SetRectXY(&rcShow, 300, 200, 525, 370);
 	SetRectXY(&rcHide, 300, -370, 525, 370);
 
-	SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+18);
+	//SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+18);
+	SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+7);
 	CParentClass::Create(
 		"ShopWnd",
 		pParent,

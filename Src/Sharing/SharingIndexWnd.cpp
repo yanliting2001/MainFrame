@@ -9,7 +9,8 @@
 #include "../OSDControl/BCM_Control.h"
 #endif
 
-
+#define BTN_FOOD_BTN_ID 0x01
+#define BTN_SHOP_BTN_ID 0x02
 #define BTN_ACTIVETILE_ID	0x03
 
 extern CMainCtrlPage *gMainCtrlPage;
@@ -175,21 +176,22 @@ void CSharingIndexWnd::Create(CBaseWnd *pParent)
 	mLoginQRCodeWnd.CreateStatic(this, rcControl);
   	mStbAddressWnd.CreateStatic(this, rcControl);
   	mWorkTimeWnd.CreateStatic(this, rcControl);
+	mPayItemsWnd.Create(this);
 
-	mFoodBtn.Create(this, rcControl, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
+	mFoodBtn.Create(this, rcControl);//, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
   	mFoodBtn.SetWndID(BTN_FOOD_BTN_ID);
   	mFoodBtn.SetOnClickListener(this);
 
-	mShopBtn.Create(this, rcControl, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
+	mShopBtn.Create(this, rcControl);//, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
   	mShopBtn.SetWndID(BTN_SHOP_BTN_ID);
   	mShopBtn.SetOnClickListener(this);
-
-  	mPayItemsWnd.Create(this);
-  
+  	
+ 
+	/* 
   	mActivityTitle.Create(this, rcControl, BUTTONTYPE_NORMAL, false, PRESSED_SCALE);
 	mActivityTitle.SetWndID(BTN_ACTIVETILE_ID);
 	mActivityTitle.SetOnClickListener(this);
-  
+  	*/
 	LoadResource();
 	mPayItemsWnd.RefreshPayInfo();
 	mPayItemsWnd.SetWindowVisible(TRUE);
@@ -233,14 +235,14 @@ void CSharingIndexWnd::LoadResource()
 
 	XmlLoadRect(&parser, "FoodInfo", &rcControl);
 	SAFE_STRNCPY(imgPath, parser.GetStrValue("FoodInfo", "path", "Sharing/Food"), sizeof(imgPath));
-	CreateBtnImgTextures(imgPath, bkTexture);
-	mFoodBtn.SetTextures(bkTexture);
+	CreateBtnImgTextures(imgPath, btnTextures);
+	mFoodBtn.SetTextures(btnTextures);
 	mFoodBtn.MoveWindow(&rcControl);
 
 	XmlLoadRect(&parser, "ShopInfo", &rcControl);
 	SAFE_STRNCPY(imgPath, parser.GetStrValue("ShopInfo", "path", "Sharing/Shop"), sizeof(imgPath));
-	CreateBtnImgTextures(imgPath, bkTexture);
-	mShopBtn.SetTextures(bkTexture);
+	CreateBtnImgTextures(imgPath, btnTextures);
+	mShopBtn.SetTextures(btnTextures);
 	mShopBtn.MoveWindow(&rcControl);
 
   XmlLoadRect(&parser, "StbAddressInfo", &rcControl);
@@ -277,6 +279,7 @@ void CSharingIndexWnd::OnClick(CBaseWnd *pWnd, POINT pt)
 	if ( pWnd )
 	{
 		int nWndID = pWnd->GetWndID();
+		DbgOutput(DBG_ERR, "Sharing window onClick id = %d\n", nWndID);
 		switch ( nWndID )
 		{
 		

@@ -23,7 +23,8 @@ void CFoodWnd::Create(CBaseWnd *pParent)
 	foodItemIndex = 0;
 	//RECT rc = {0, 0, LAYOUT_WIDTH, LAYOUT_HEIGHT};
 
-	SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+18);
+	//SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+18);
+	SetZorderNumber(WINDOWS_ZORDER_MOUSETEXTURE+7);
 	//CreateStatic(pParent,	rc,  WINDOWFLAG_MANUALSETZORDER|WINDOWFLAG_POPUP, WINDOWSTATE_INVISIBLE);
 	
 	CParentClass::Create(
