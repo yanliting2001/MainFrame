@@ -351,6 +351,7 @@ void CHomePageFragment::OnClickItem(HOMEPAGESELECTTYPE_E type)
     break;
    */ 
   case selectType_NewSongs:
+    {
     static SEARCHITEM search;
 		search.eType = SearchByNewSong;
 		search.nDepth = 0;
@@ -358,8 +359,10 @@ void CHomePageFragment::OnClickItem(HOMEPAGESELECTTYPE_E type)
 		SAFE_STRNCPY(search.cItemName, "新歌", sizeof(search.cItemName));
 		gSongListFragment->SetSearchBarItem(&search, 0);
 		gMainCtrlPage->SetCurrentFragment(Fragment_SongList);
+    }
     break;
     case selectType_movie:
+    {
 		static SEARCHITEM search;
 		search.eType = SearchBySongType;
 		search.nDepth = 248;
@@ -367,6 +370,7 @@ void CHomePageFragment::OnClickItem(HOMEPAGESELECTTYPE_E type)
 		SAFE_STRNCPY(search.cItemName, "影视", sizeof(search.cItemName));
 		gSongListFragment->SetSearchBarItem(&search, 0);
 		gMainCtrlPage->SetCurrentFragment(Fragment_SongList);
+    }
 		break;
 	/*
 	case selectType_UDisk:
