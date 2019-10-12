@@ -461,6 +461,17 @@ void CSongListFragment::OnListCtrlItemClicked(int nItemIndex, int nSubItemIndex)
 			}
       SendClickSongID(pSongInfo->cID);
 	}
+  	else if(nSubItemIndex == lviSongItemImage)
+  	{
+  		char *pSingerInfo = FastSearch_GetSingerByID(pSongInfo->singerID);
+		static SEARCHITEM search;
+		search.eType = SearchBySinger;
+		search.nDepth = pSongInfo->singerID;
+		search.pParentItem = NULL;
+		SAFE_STRNCPY(search.cItemName, pSingerInfo->cName, sizeof(search.cItemName));
+		gSongListFragment->SetSearchBarItem(&search, 0);	
+		gMainCtrlPage->SetCurrentFragment(Fragment_SongList);
+  	}
 	else if (nSubItemIndex == lviSongFavoritBtn)
 	{
 		gMainCtrlPage->AddToFavorit(pSongInfo->cID);
