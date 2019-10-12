@@ -364,13 +364,13 @@ void CPlayerInfo::PlayNext(
 	}
 	else
 	{
+		/*
 		memset(&mPlayingPublicSong,0,sizeof(mPlayingPublicSong));
 		/////mPlayingSong  have path and track 
 		///start dump main track 
 #ifdef  DUMP_AUDIO_PCM
 		g_pBCM_Ctrl->AudioCompareCheck(mPlayingSong.cFilePath,mPlayingSong.wTrack);
 #else
-		ddsafas
 		g_pBCM_Ctrl->AudioCompareStart();
 #endif
 		Play(&mPlayingSong, bForceSwitch);
@@ -379,6 +379,7 @@ void CPlayerInfo::PlayNext(
 			ReportUIStateChangedToPad((int)SYNCTYPE_SWITCH);
 
 		CBaseRecord::Start_Record();
+		*/
 	}
 
 	ReportListStateChanged();
